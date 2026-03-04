@@ -9,7 +9,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### Bai Zihan
+### John Doe
 
 <img src="images/johndoe.png" width="200px">
 
