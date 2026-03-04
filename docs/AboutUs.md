@@ -55,5 +55,5 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[homepage](https://chenguanhua.com)]
 [[github](https://github.com/e-hua)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Integration & Testing
+* Responsibilities: Dev Ops + Data 
