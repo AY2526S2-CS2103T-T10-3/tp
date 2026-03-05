@@ -154,6 +154,99 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
+## **Use Cases**
+
+**System:** HireShell
+**Use Case:** UC01- Add a candidate
+**Actor:** Recruiter
+**MSS:**
+1.	Recruiter selects the option to add a candidate
+2.	HireShell asks for candidate contacts with key fields
+3.	Recruiter enters candidate information
+4.	HireShell shows that the candidate has been successfully added
+Use Case ends.
+**Extensions:**
+    3a. HireShell detects missing/invalid information in a key field
+        3a1. HireShell requests for missing/invalid information
+        3a2. Recruiter re-enters missing/invalid information
+        Steps 3a1-3a2 are repeated until there is no missing/invalid information in key fields
+        Use case resumes from step 4.
+
+
+**System:** HireShell
+**Use Case:** UC02- Add a candidate using CLI
+**Actor:** Recruiter
+**MSS:**
+1.	Recruiter opens the CLI
+2.	Recruiter enters the command to add a new candidate
+3.	Recruiter enters candidate information
+4.	HireShell shows that the candidate has been successfully added
+Use Case ends.
+**Extensions:**
+    3a. HireShell detects missing/invalid information in a key field
+        3a1. HireShell requests for missing/invalid information
+        3a2. Recruiter re-enters missing/invalid information
+        Steps 3a1-3a2 are repeated until there is no missing/invalid information in key fields
+        Use case resumes from step 4.
+
+
+**System:** HireShell
+**Use Case:** UC03- Delete a candidate using CLI
+**Actor:** Recruiter
+**MSS:**
+1.	Recruiter opens the CLI
+2.	Recruiter enters the command to delete a candidate
+3.	HireShell shows that the candidate has been successfully added
+Use Case ends.
+**Extensions:**
+    2a. HireShell detects that the candidate does not exist
+        2a1. HireShell shows that the candidate does not exist
+        Use case ends.
+
+
+**System:** HireShell
+**Use Case:** UC04- Edit a candidate using CLI
+**Actor:** Recruiter
+**MSS:**
+1.	Recruiter opens the CLI
+2.	Recruiter enters the command to edit a candidate
+3.	HireShell shows that the candidate’s information has been successfully edited
+Use Case ends.
+**Extensions:**
+    2a. HireShell detects that the candidate does not exist
+        2a1. HireShell shows that the candidate does not exist
+        Use case ends.
+
+
+**System:** HireShell
+**Use Case:** UC05- Navigate the list of candidates using CLI
+**Actor:** Recruiter
+**MSS:**
+1.	Recruiter opens the CLI
+2.	Recruiter enters the command to view all candidates
+3.	HireShell shows a list of candidates
+Use Case ends.
+**Extensions:**
+    2a. HireShell detects that there are no candidates
+        2a1. HireShell shows that there are no candidates
+        Use case ends.
+
+**System:** HireShell
+**Use Case:** UC06- Batch delete candidates using CLI
+**Actor:** Recruiter
+**MSS:**
+1.	Recruiter opens the CLI
+2.	Recruiter enters the command to batch delete candidates according to filter
+3.	HireShell shows that the candidates have been deleted
+Use Case ends.
+**Extensions:**	
+    2a. HireShell detects that there are no candidates
+        2a1. HireShell shows that there are no candidates to delete
+        Use case ends.
+
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
