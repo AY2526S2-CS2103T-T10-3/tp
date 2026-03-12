@@ -1,17 +1,13 @@
 package seedu.hireshell.testutil;
 
-import static seedu.hireshell.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.hireshell.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.hireshell.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.hireshell.logic.parser.CliSyntax.PREFIX_ROLE;
-import static seedu.hireshell.logic.parser.CliSyntax.PREFIX_STATUS;
-
 import java.util.Set;
 
 import seedu.hireshell.logic.commands.AddCommand;
 import seedu.hireshell.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.hireshell.model.person.Person;
 import seedu.hireshell.model.role.Role;
+
+import static seedu.hireshell.logic.parser.CliSyntax.*;
 
 /**
  * A utility class for Person.
@@ -34,6 +30,7 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_STATUS + person.getStatus().value + " ");
+        sb.append(PREFIX_REFERRAL_STATUS + person.getReferralStatus().toString() + " ");
         person.getRoles().stream().forEach(
             s -> sb.append(PREFIX_ROLE + s.roleName + " ")
         );
@@ -48,7 +45,9 @@ public class PersonUtil {
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
-        descriptor.getStatus().ifPresent(address -> sb.append(PREFIX_STATUS).append(address.value).append(" "));
+        descriptor.getStatus().ifPresent(status -> sb.append(PREFIX_STATUS).append(status.value).append(" "));
+        descriptor.getReferralStatus().ifPresent(referralStatus -> sb.append(PREFIX_REFERRAL_STATUS)
+                .append(referralStatus.toString()).append(" "));
         if (descriptor.getRoles().isPresent()) {
             Set<Role> roles = descriptor.getRoles().get();
             if (roles.isEmpty()) {

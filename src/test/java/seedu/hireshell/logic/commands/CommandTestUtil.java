@@ -36,6 +36,9 @@ public class CommandTestUtil {
     public static final String VALID_STATUS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_ROLE_HUSBAND = "husband";
     public static final String VALID_ROLE_FRIEND = "friend";
+    public static final String VALID_REFERRAL_STATUS_AMY = "yes";
+    public static final String VALID_REFERRAL_STATUS_BOB = "no";
+
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;

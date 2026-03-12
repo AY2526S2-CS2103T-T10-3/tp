@@ -20,7 +20,7 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_STATUS = "pending";
+    public static final String DEFAULT_STATUS = "Pending";
 
 
     private Name name;
@@ -39,7 +39,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         roles = new HashSet<>();
         status = new Status(DEFAULT_STATUS);
-        referralStatus = ReferralStatus.DEFAULT_REFERRAL_STATUS;
+        referralStatus = ReferralStatus.NOT_REFERRED;
     }
 
     /**
@@ -91,6 +91,22 @@ public class PersonBuilder {
      */
     public PersonBuilder withEmail(String email) {
         this.email = new Email(email);
+        return this;
+    }
+
+    /**
+     * Sets the {@code ReferralStatus} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withReferralStatus(ReferralStatus referralStatus) {
+        this.referralStatus = referralStatus;
+        return this;
+    }
+
+    /**
+     * Optional convenience method to set referral status via string "yes"/"no".
+     */
+    public PersonBuilder withReferralStatus(String referralStatusString) {
+        this.referralStatus = ReferralStatus.fromString(referralStatusString);
         return this;
     }
 
