@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.hireshell.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.hireshell.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.hireshell.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.hireshell.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.hireshell.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.hireshell.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.hireshell.commons.util.ToStringBuilder;
 import seedu.hireshell.logic.Messages;
@@ -26,14 +26,14 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_STATUS + "STATUS "
-            + "[" + PREFIX_ROLE + "ROLE]...\n"
+            + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_STATUS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_ROLE + "SoftwareEngineer "
-            + PREFIX_ROLE + "QuantitativeResearcher";
+            + PREFIX_TAG + "friends "
+            + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";

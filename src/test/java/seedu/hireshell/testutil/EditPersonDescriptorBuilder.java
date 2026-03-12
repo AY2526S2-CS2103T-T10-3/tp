@@ -10,7 +10,7 @@ import seedu.hireshell.model.person.Name;
 import seedu.hireshell.model.person.Person;
 import seedu.hireshell.model.person.Phone;
 import seedu.hireshell.model.person.Status;
-import seedu.hireshell.model.role.Role;
+import seedu.hireshell.model.tag.Tag;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -35,8 +35,8 @@ public class EditPersonDescriptorBuilder {
         descriptor.setName(person.getName());
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
-        descriptor.setRoles(person.getRoles());
         descriptor.setStatus(person.getStatus());
+        descriptor.setTags(person.getTags());
     }
 
     /**
@@ -72,12 +72,12 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code roles} into a {@code Set<Role>} and set it to the {@code EditPersonDescriptor}
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
-    public EditPersonDescriptorBuilder withRoles(String... roles) {
-        Set<Role> roleSet = Stream.of(roles).map(Role::new).collect(Collectors.toSet());
-        descriptor.setRoles(roleSet);
+    public EditPersonDescriptorBuilder withTags(String... tags) {
+        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
+        descriptor.setTags(tagSet);
         return this;
     }
 

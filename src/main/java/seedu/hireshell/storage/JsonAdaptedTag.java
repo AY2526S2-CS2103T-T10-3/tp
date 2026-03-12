@@ -4,45 +4,45 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.hireshell.commons.exceptions.IllegalValueException;
-import seedu.hireshell.model.role.Role;
+import seedu.hireshell.model.tag.Tag;
 
 /**
- * Jackson-friendly version of {@link Role}.
+ * Jackson-friendly version of {@link Tag}.
  */
-class JsonAdaptedRole {
+class JsonAdaptedTag {
 
-    private final String roleName;
+    private final String tagName;
 
     /**
-     * Constructs a {@code JsonAdaptedRole} with the given {@code roleName}.
+     * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
      */
     @JsonCreator
-    public JsonAdaptedRole(String roleName) {
-        this.roleName = roleName;
+    public JsonAdaptedTag(String tagName) {
+        this.tagName = tagName;
     }
 
     /**
-     * Converts a given {@code Role} into this class for Jackson use.
+     * Converts a given {@code Tag} into this class for Jackson use.
      */
-    public JsonAdaptedRole(Role source) {
-        roleName = source.roleName;
+    public JsonAdaptedTag(Tag source) {
+        tagName = source.tagName;
     }
 
     @JsonValue
-    public String getRoleName() {
-        return roleName;
+    public String getTagName() {
+        return tagName;
     }
 
     /**
-     * Converts this Jackson-friendly adapted role object into the model's {@code Role} object.
+     * Converts this Jackson-friendly adapted tag object into the model's {@code Tag} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted role.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
-    public Role toModelType() throws IllegalValueException {
-        if (!Role.isValidRoleName(roleName)) {
-            throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
+    public Tag toModelType() throws IllegalValueException {
+        if (!Tag.isValidTagName(tagName)) {
+            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Role(roleName);
+        return new Tag(tagName);
     }
 
 }

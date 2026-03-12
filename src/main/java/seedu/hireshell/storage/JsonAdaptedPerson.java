@@ -15,7 +15,7 @@ import seedu.hireshell.model.person.Name;
 import seedu.hireshell.model.person.Person;
 import seedu.hireshell.model.person.Phone;
 import seedu.hireshell.model.person.Status;
-import seedu.hireshell.model.role.Role;
+import seedu.hireshell.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -27,8 +27,8 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String email;
-    private final List<JsonAdaptedRole> roles = new ArrayList<>();
     private final String status;
+    private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -36,13 +36,13 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("status") String status,
-            @JsonProperty("roles") List<JsonAdaptedRole> roles) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.status = status;
-        if (roles != null) {
-            this.roles.addAll(roles);
+        if (tags != null) {
+            this.tags.addAll(tags);
         }
     }
 
@@ -54,8 +54,8 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         status = source.getStatus().value;
-        roles.addAll(source.getRoles().stream()
-                .map(JsonAdaptedRole::new)
+        tags.addAll(source.getTags().stream()
+                .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
     }
 
@@ -65,9 +65,9 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Role> personRoles = new ArrayList<>();
-        for (JsonAdaptedRole role : roles) {
-            personRoles.add(role.toModelType());
+        final List<Tag> personTags = new ArrayList<>();
+        for (JsonAdaptedTag tag : tags) {
+            personTags.add(tag.toModelType());
         }
 
         if (name == null) {
@@ -102,8 +102,8 @@ class JsonAdaptedPerson {
         }
         final Status modelStatus = new Status(status);
 
-        final Set<Role> modelRoles = new HashSet<>(personRoles);
-        return new Person(modelName, modelPhone, modelEmail, modelStatus, modelRoles);
+        final Set<Tag> modelTags = new HashSet<>(personTags);
+        return new Person(modelName, modelPhone, modelEmail, modelStatus, modelTags);
     }
 
 }
