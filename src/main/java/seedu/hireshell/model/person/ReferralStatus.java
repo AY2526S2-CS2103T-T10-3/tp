@@ -28,4 +28,5 @@ public enum ReferralStatus {
     public boolean isReferred() {
         return this == REFERRED;
     }
+
 }
