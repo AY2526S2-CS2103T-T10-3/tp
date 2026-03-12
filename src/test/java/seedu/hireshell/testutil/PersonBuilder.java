@@ -7,6 +7,7 @@ import seedu.hireshell.model.person.Email;
 import seedu.hireshell.model.person.Name;
 import seedu.hireshell.model.person.Person;
 import seedu.hireshell.model.person.Phone;
+import seedu.hireshell.model.person.Rating;
 import seedu.hireshell.model.person.Status;
 import seedu.hireshell.model.role.Role;
 import seedu.hireshell.model.util.SampleDataUtil;
@@ -19,11 +20,13 @@ public class PersonBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final String DEFAULT_RATING = "5.0";
     public static final String DEFAULT_STATUS = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
     private Phone phone;
     private Email email;
+    private Rating rating;
     private Set<Role> roles;
     private Status status;
 
@@ -34,6 +37,7 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
+        rating = new Rating(DEFAULT_RATING);
         roles = new HashSet<>();
         status = new Status(DEFAULT_STATUS);
     }
@@ -45,6 +49,7 @@ public class PersonBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
+        rating = personToCopy.getRating();
         roles = new HashSet<>(personToCopy.getRoles());
         status = personToCopy.getStatus();
     }
@@ -62,6 +67,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withRoles(String ... roles) {
         this.roles = SampleDataUtil.getRoleSet(roles);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Rating} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withRating(String rating) { // Added withRating method
+        this.rating = new Rating(rating);
         return this;
     }
 
@@ -90,7 +103,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, status, roles);
+        return new Person(name, phone, email, rating, status, roles);
     }
 
 }

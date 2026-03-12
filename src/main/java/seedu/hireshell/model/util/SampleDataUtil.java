@@ -10,6 +10,7 @@ import seedu.hireshell.model.person.Email;
 import seedu.hireshell.model.person.Name;
 import seedu.hireshell.model.person.Person;
 import seedu.hireshell.model.person.Phone;
+import seedu.hireshell.model.person.Rating;
 import seedu.hireshell.model.person.Status;
 import seedu.hireshell.model.role.Role;
 
@@ -20,22 +21,22 @@ public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Status("Blk 30 Geylang Street 29, #06-40"),
+                new Rating("8.5"), new Status("Accepted"),
                 getRoleSet("friends")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Status("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
+                new Rating("9.0"), new Status("Offered"),
                 getRoleSet("colleagues", "friends")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Status("Blk 11 Ang Mo Kio Street 74, #11-04"),
+                new Rating("6.0"), new Status("Offered"),
                 getRoleSet("neighbours")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new Status("Blk 436 Serangoon Gardens Street 26, #16-43"),
+                new Rating("7.0"), new Status("Blk 436 Serangoon Gardens Street 26, #16-43"),
                 getRoleSet("family")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Status("Blk 47 Tampines Street 20, #17-35"),
+                new Rating("9.5"), new Status("Offered"),
                 getRoleSet("classmates")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Status("Blk 45 Aljunied Street 85, #11-31"),
+                new Rating("5.5"), new Status("Rejected"),
                 getRoleSet("colleagues"))
         };
     }

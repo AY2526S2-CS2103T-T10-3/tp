@@ -9,6 +9,7 @@ import seedu.hireshell.model.person.Email;
 import seedu.hireshell.model.person.Name;
 import seedu.hireshell.model.person.Person;
 import seedu.hireshell.model.person.Phone;
+import seedu.hireshell.model.person.Rating;
 import seedu.hireshell.model.person.Status;
 import seedu.hireshell.model.role.Role;
 
@@ -35,6 +36,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setName(person.getName());
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
+        descriptor.setRating(person.getRating());
         descriptor.setRoles(person.getRoles());
         descriptor.setStatus(person.getStatus());
     }
@@ -60,6 +62,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withEmail(String email) {
         descriptor.setEmail(new Email(email));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Rating} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withRating(String rating) {
+        descriptor.setRating(new Rating(rating));
         return this;
     }
 
