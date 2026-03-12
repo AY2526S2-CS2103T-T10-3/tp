@@ -42,7 +42,7 @@ public class Messages {
                 .append("; Email: ")
                 .append(person.getEmail())
                 .append("; Address: ")
-                .append(person.getAddress())
+                .append(person.getStatus())
                 .append("; Roles: ");
         person.getRoles().forEach(builder::append);
         return builder.toString();

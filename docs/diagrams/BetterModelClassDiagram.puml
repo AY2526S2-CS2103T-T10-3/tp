@@ -17,5 +17,5 @@ Person -up-> "*" Role
 Person *--> Name
 Person *--> Phone
 Person *--> Email
-Person *--> Address
+Person *--> Status
 @enduml

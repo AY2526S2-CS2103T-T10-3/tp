@@ -1,7 +1,5 @@
 package seedu.hireshell.testutil;
 
-import static seedu.hireshell.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
-import static seedu.hireshell.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.hireshell.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.hireshell.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.hireshell.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -10,6 +8,8 @@ import static seedu.hireshell.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.hireshell.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.hireshell.logic.commands.CommandTestUtil.VALID_ROLE_FRIEND;
 import static seedu.hireshell.logic.commands.CommandTestUtil.VALID_ROLE_HUSBAND;
+import static seedu.hireshell.logic.commands.CommandTestUtil.VALID_STATUS_AMY;
+import static seedu.hireshell.logic.commands.CommandTestUtil.VALID_STATUS_BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -50,9 +50,9 @@ public class TypicalPersons {
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withRoles(VALID_ROLE_FRIEND).build();
+            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_STATUS_AMY).withRoles(VALID_ROLE_FRIEND).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withRoles(VALID_ROLE_HUSBAND, VALID_ROLE_FRIEND)
+            .withEmail(VALID_EMAIL_BOB).withAddress(VALID_STATUS_BOB).withRoles(VALID_ROLE_HUSBAND, VALID_ROLE_FRIEND)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

@@ -5,12 +5,12 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.hireshell.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.hireshell.model.person.Address;
 import seedu.hireshell.model.person.Email;
 import seedu.hireshell.model.person.Name;
 import seedu.hireshell.model.person.Person;
 import seedu.hireshell.model.person.Phone;
 import seedu.hireshell.model.role.Role;
+import seedu.hireshell.model.person.Status;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -35,8 +35,8 @@ public class EditPersonDescriptorBuilder {
         descriptor.setName(person.getName());
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
-        descriptor.setAddress(person.getAddress());
         descriptor.setRoles(person.getRoles());
+        descriptor.setStatus(person.getStatus());
     }
 
     /**
@@ -67,7 +67,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Address(address));
+        descriptor.setStatus(new Status(address));
         return this;
     }
 

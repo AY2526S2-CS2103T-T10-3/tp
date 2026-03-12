@@ -1,30 +1,30 @@
 package seedu.hireshell.logic.parser;
 
 import static seedu.hireshell.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.hireshell.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.hireshell.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.hireshell.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.hireshell.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.hireshell.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.hireshell.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.hireshell.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.hireshell.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.hireshell.logic.commands.CommandTestUtil.INVALID_ROLE_DESC;
+import static seedu.hireshell.logic.commands.CommandTestUtil.INVALID_STATUS_DESC;
 import static seedu.hireshell.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.hireshell.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.hireshell.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.hireshell.logic.commands.CommandTestUtil.STATUS_DESC_AMY;
+import static seedu.hireshell.logic.commands.CommandTestUtil.STATUS_DESC_BOB;
 import static seedu.hireshell.logic.commands.CommandTestUtil.ROLE_DESC_FRIEND;
 import static seedu.hireshell.logic.commands.CommandTestUtil.ROLE_DESC_HUSBAND;
-import static seedu.hireshell.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.hireshell.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.hireshell.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.hireshell.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.hireshell.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.hireshell.logic.commands.CommandTestUtil.VALID_STATUS_AMY;
 import static seedu.hireshell.logic.commands.CommandTestUtil.VALID_ROLE_FRIEND;
 import static seedu.hireshell.logic.commands.CommandTestUtil.VALID_ROLE_HUSBAND;
-import static seedu.hireshell.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.hireshell.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.hireshell.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.hireshell.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.hireshell.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.hireshell.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.hireshell.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -38,11 +38,11 @@ import seedu.hireshell.commons.core.index.Index;
 import seedu.hireshell.logic.Messages;
 import seedu.hireshell.logic.commands.EditCommand;
 import seedu.hireshell.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.hireshell.model.person.Address;
 import seedu.hireshell.model.person.Email;
 import seedu.hireshell.model.person.Name;
 import seedu.hireshell.model.person.Phone;
 import seedu.hireshell.model.role.Role;
+import seedu.hireshell.model.person.Status;
 import seedu.hireshell.testutil.EditPersonDescriptorBuilder;
 
 public class EditCommandParserTest {
@@ -86,8 +86,8 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
         assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
-        assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid address
-        assertParseFailure(parser, "1" + INVALID_ROLE_DESC, Role.MESSAGE_CONSTRAINTS); // invalid role
+        assertParseFailure(parser, "1" + INVALID_STATUS_DESC, Status.MESSAGE_CONSTRAINTS); // invalid status
+        assertParseFailure(parser, "1" + INVALID_ROLE_DESC, Role.MESSAGE_CONSTRAINTS); // invalid tag
 
         // invalid phone followed by valid email
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
@@ -99,7 +99,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + ROLE_EMPTY + ROLE_DESC_FRIEND + ROLE_DESC_HUSBAND, Role.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_AMY + VALID_PHONE_AMY,
+        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_STATUS_AMY + VALID_PHONE_AMY,
                 Name.MESSAGE_CONSTRAINTS);
     }
 
@@ -107,10 +107,10 @@ public class EditCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + ROLE_DESC_HUSBAND
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + ROLE_DESC_FRIEND;
+                + EMAIL_DESC_AMY + STATUS_DESC_AMY + NAME_DESC_AMY + ROLE_DESC_FRIEND;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_STATUS_AMY)
                 .withRoles(VALID_ROLE_HUSBAND, VALID_ROLE_FRIEND).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -150,9 +150,9 @@ public class EditCommandParserTest {
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // address
-        userInput = targetIndex.getOneBased() + ADDRESS_DESC_AMY;
-        descriptor = new EditPersonDescriptorBuilder().withAddress(VALID_ADDRESS_AMY).build();
+        // status
+        userInput = targetIndex.getOneBased() + STATUS_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withAddress(VALID_STATUS_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -180,19 +180,19 @@ public class EditCommandParserTest {
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // mulltiple valid fields repeated
-        userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY
-                + ROLE_DESC_FRIEND + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + ROLE_DESC_FRIEND
-                + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + ROLE_DESC_HUSBAND;
+        userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + STATUS_DESC_AMY + EMAIL_DESC_AMY
+                + ROLE_DESC_FRIEND + PHONE_DESC_AMY + STATUS_DESC_AMY + EMAIL_DESC_AMY + ROLE_DESC_FRIEND
+                + PHONE_DESC_BOB + STATUS_DESC_BOB + EMAIL_DESC_BOB + ROLE_DESC_HUSBAND;
 
         assertParseFailure(parser, userInput,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_STATUS));
 
         // multiple invalid values
-        userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC
-                + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC;
+        userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + INVALID_STATUS_DESC + INVALID_EMAIL_DESC
+                + INVALID_PHONE_DESC + INVALID_STATUS_DESC + INVALID_EMAIL_DESC;
 
         assertParseFailure(parser, userInput,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_STATUS));
     }
 
     @Test

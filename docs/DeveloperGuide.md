@@ -35,7 +35,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/hireshell/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/hireshell/MainApp.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -67,13 +67,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/hireshell/ui/Ui.java)
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/hireshell/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -84,7 +84,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/hireshell/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -116,7 +116,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/hireshell/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
@@ -139,7 +139,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/hireshell/storage/Storage.java)
 
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
@@ -327,8 +327,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | recruiter      | define a contact “lifecycle” rule (e.g., archive after 90 days inactive)                                        | keep my database current with minimal effort                                            |
 | `* *`    | recruiter      | use command aliases (e.g., a for add, d for delete, e for edit)                                                 | type commands faster                                                                    |
 | `*`      | recruiter      | use tab-based auto-completion for commands and prefixes                                                         | not need to memorise full syntax                                                        |
+<<<<<<< HEAD
 | `* *`    | recruiter      | find contacts using other fields (phone, email, role, address)                                                   | retrieve someone even if I forget their name                                            |
 | `* * *`  | recruiter      | filter contacts by role                                                                                          | group similar contacts easily                                                           |
+=======
+| `* *`    | recruiter      | find contacts using other fields (phone, email, tag, status)                                                   | retrieve someone even if I forget their name                                            |
+| `* * *`  | recruiter      | filter contacts by tag                                                                                          | group similar contacts easily                                                           |
+>>>>>>> master
 | `*`      | recruiter      | paste a messy block of text (email signature / LinkedIn snippet) and have fields auto-suggested                 | avoid manual retyping                                                                   |
 | `* *`    | recruiter      | use positional arguments for fast entry (e.g., add "John Doe" 91234567 [john@email.com](mailto:john@email.com)) | input data quickly                                                                      |
 | `*`      | recruiter      | view “recently modified” candidates                                                                             | resume work where I left off without remembering names                                  |
@@ -344,7 +349,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | recruiter      | mark a contact as favourite or important                                                                        | quickly find high-priority candidates                                                   |
 | `* * *`  | recruiter      | see a confirmation message after adding, editing, or deleting a contact                                         | know my command worked                                                                  |
 | `* *`    | recruiter      | archive contacts instead of deleting                                                                            | keep historical records                                                                 |
-| `*`      | recruiter      | copy a candidate's email address to my clipboard with a single command                                          | switch to my email app and paste it                                                     |
+| `*`      | recruiter      | copy a candidate's email status to my clipboard with a single command                                          | switch to my email app and paste it                                                     |
 | `* *`    | recruiter      | see a count of how many candidates match my current filter                                                      | know if my search pool is too broad                                                     |
 | `* * *`  | recruiter      | delete a specific contact                                                                                       | keep my contact list from getting cluttered                                             |
 | `* * *`  | recruiter      | navigate through the list                                                                                       | view my contacts                                                                        |

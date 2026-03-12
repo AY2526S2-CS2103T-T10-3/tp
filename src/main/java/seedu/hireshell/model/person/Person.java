@@ -22,18 +22,18 @@ public class Person {
     private final Email email;
 
     // Data fields
-    private final Address address;
+    private final Status status;
     private final Set<Role> roles = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Role> roles) {
-        requireAllNonNull(name, phone, email, address, roles);
+    public Person(Name name, Phone phone, Email email, Status status, Set<Role> roles) {
+        requireAllNonNull(name, phone, email, status, roles);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
+        this.status = status;
         this.roles.addAll(roles);
     }
 
@@ -49,8 +49,8 @@ public class Person {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public Status getStatus() {
+        return status;
     }
 
     /**
@@ -93,14 +93,14 @@ public class Person {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
+                && status.equals(otherPerson.status)
                 && roles.equals(otherPerson.roles);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, roles);
+        return Objects.hash(name, phone, email, status, roles);
     }
 
     @Override
@@ -109,7 +109,7 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("address", address)
+                .add("status", status)
                 .add("roles", roles)
                 .toString();
     }

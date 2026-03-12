@@ -2,11 +2,11 @@ package seedu.hireshell.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.hireshell.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.hireshell.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.hireshell.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.hireshell.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.hireshell.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.hireshell.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.hireshell.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -32,7 +32,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_ROLE);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_STATUS, PREFIX_ROLE);
 
         Index index;
 
@@ -42,7 +42,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_STATUS);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
@@ -55,8 +55,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
-        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
+        if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
+            editPersonDescriptor.setStatus(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_STATUS).get()));
         }
         parseRolesForEdit(argMultimap.getAllValues(PREFIX_ROLE)).ifPresent(editPersonDescriptor::setRoles);
 

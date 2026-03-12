@@ -4,15 +4,15 @@ import static java.util.Objects.requireNonNull;
 import static seedu.hireshell.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's address in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
+ * Represents a Person's status in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidStatus(String)}
  */
-public class Address {
+public class Status {
 
-    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Statuses can take any values, and it should not be blank";
 
     /*
-     * The first character of the address must not be a whitespace,
+     * The first character of the status must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";
@@ -20,20 +20,20 @@ public class Address {
     public final String value;
 
     /**
-     * Constructs an {@code Address}.
+     * Constructs an {@code Sddress}.
      *
-     * @param address A valid address.
+     * @param status A valid status.
      */
-    public Address(String address) {
-        requireNonNull(address);
-        checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
-        value = address;
+    public Status(String status) {
+        requireNonNull(status);
+        checkArgument(isValidStatus(status), MESSAGE_CONSTRAINTS);
+        value = status;
     }
 
     /**
      * Returns true if a given string is a valid email.
      */
-    public static boolean isValidAddress(String test) {
+    public static boolean isValidStatus(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
@@ -49,12 +49,12 @@ public class Address {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Address)) {
+        if (!(other instanceof Status)) {
             return false;
         }
 
-        Address otherAddress = (Address) other;
-        return value.equals(otherAddress.value);
+        Status otherStatus = (Status) other;
+        return value.equals(otherStatus.value);
     }
 
     @Override

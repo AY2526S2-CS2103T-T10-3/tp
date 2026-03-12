@@ -9,11 +9,11 @@ import java.util.Set;
 import seedu.hireshell.commons.core.index.Index;
 import seedu.hireshell.commons.util.StringUtil;
 import seedu.hireshell.logic.parser.exceptions.ParseException;
-import seedu.hireshell.model.person.Address;
 import seedu.hireshell.model.person.Email;
 import seedu.hireshell.model.person.Name;
 import seedu.hireshell.model.person.Phone;
 import seedu.hireshell.model.role.Role;
+import seedu.hireshell.model.person.Status;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -71,13 +71,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code address} is invalid.
      */
-    public static Address parseAddress(String address) throws ParseException {
+    public static Status parseAddress(String address) throws ParseException {
         requireNonNull(address);
         String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+        if (!Status.isValidStatus(trimmedAddress)) {
+            throw new ParseException(Status.MESSAGE_CONSTRAINTS);
         }
-        return new Address(trimmedAddress);
+        return new Status(trimmedAddress);
     }
 
     /**
