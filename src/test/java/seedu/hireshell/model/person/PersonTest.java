@@ -3,6 +3,7 @@ package seedu.hireshell.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.hireshell.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.hireshell.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.hireshell.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.hireshell.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -10,7 +11,9 @@ import static seedu.hireshell.logic.commands.CommandTestUtil.VALID_ROLE_HUSBAND;
 import static seedu.hireshell.logic.commands.CommandTestUtil.VALID_STATUS_BOB;
 import static seedu.hireshell.testutil.Assert.assertThrows;
 import static seedu.hireshell.testutil.TypicalPersons.ALICE;
+import static seedu.hireshell.testutil.TypicalPersons.AMY;
 import static seedu.hireshell.testutil.TypicalPersons.BOB;
+
 
 import org.junit.jupiter.api.Test;
 
@@ -32,13 +35,13 @@ public class PersonTest {
         // null -> returns false
         assertFalse(ALICE.isSamePerson(null));
 
-        // same name, all other attributes different -> returns true
-        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+        // same name and phone number, all other attributes different -> returns true
+        Person editedAmy = new PersonBuilder(AMY).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_STATUS_BOB).withRoles(VALID_ROLE_HUSBAND).build();
-        assertTrue(ALICE.isSamePerson(editedAlice));
+        assertTrue(AMY.isSamePerson(editedAmy));
 
         // different name, all other attributes same -> returns false
-        editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
 
         // name differs in case, all other attributes same -> returns false
