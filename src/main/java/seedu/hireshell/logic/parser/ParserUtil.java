@@ -91,8 +91,12 @@ public class ParserUtil {
     public static Rating parseRating(String rating) throws ParseException {
         requireNonNull(rating);
         String trimmedRating = rating.trim();
-        if (!Rating.isValidRating(trimmedRating)) {
+        if (!trimmedRating.isEmpty() && !Rating.isValidRating(trimmedRating)) {
             throw new ParseException(Rating.MESSAGE_CONSTRAINTS);
+        }
+
+        if (trimmedRating.isEmpty()) {
+            return new Rating("0");
         }
         return new Rating(trimmedRating);
     }
