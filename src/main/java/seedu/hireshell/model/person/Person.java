@@ -26,12 +26,13 @@ public class Person {
     private final Status status;
     private final Set<Role> roles = new HashSet<>();
     private final ReferralStatus referralStatus;
+    private final Detail detail;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Rating rating, Status status, Set<Role> roles,
-                  ReferralStatus referralStatus) {
+                  ReferralStatus referralStatus, Detail detail) {
         requireAllNonNull(name, phone, email, status, roles, referralStatus);
         this.name = name;
         this.phone = phone;
@@ -40,6 +41,7 @@ public class Person {
         this.status = status;
         this.roles.addAll(roles);
         this.referralStatus = referralStatus;
+        this.detail = detail;
     }
 
     public Name getName() {
@@ -72,6 +74,10 @@ public class Person {
 
     public ReferralStatus getReferralStatus() {
         return referralStatus;
+    }
+
+    public Detail getDetail() {
+        return detail;
     }
 
     /**
