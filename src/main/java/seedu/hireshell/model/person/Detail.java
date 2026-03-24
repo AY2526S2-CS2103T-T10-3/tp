@@ -19,7 +19,7 @@ public class Detail {
     public final String fullDetails;
 
     /**
-     * Constructs a {@code Name}.
+     * Constructs a {@code Detail}.
      *
      * @param details A valid description.
      */
@@ -49,7 +49,7 @@ public class Detail {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Name)) {
+        if (!(other instanceof Detail)) {
             return false;
         }
 
