@@ -24,6 +24,8 @@ public class SortCommand extends Command {
     private final boolean isAscending;
 
     /**
+     * Constructs a {@code SortCommand}.
+     *
      * @param isAscending true if the sort order is ascending, false if descending.
      */
     public SortCommand(boolean isAscending) {

@@ -22,6 +22,11 @@ public class FilterCommand extends Command {
 
     private final PersonMatchesFiltersPredicate predicate;
 
+    /**
+     * Constructs a {@code FilterCommand}.
+     *
+     * @param predicate The predicate used to filter persons.
+     */
     public FilterCommand(PersonMatchesFiltersPredicate predicate) {
         this.predicate = predicate;
     }

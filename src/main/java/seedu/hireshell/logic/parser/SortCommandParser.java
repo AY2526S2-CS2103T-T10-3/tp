@@ -14,7 +14,9 @@ public class SortCommandParser implements Parser<SortCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the SortCommand
      * and returns a SortCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * @param args The arguments to parse.
+     * @return The resulting SortCommand.
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public SortCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_RATING);

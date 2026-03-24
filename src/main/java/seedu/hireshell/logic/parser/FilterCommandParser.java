@@ -5,7 +5,6 @@ import static seedu.hireshell.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.hireshell.logic.parser.CliSyntax.PREFIX_RATING;
 import static seedu.hireshell.logic.parser.CliSyntax.PREFIX_STATUS;
 
-import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,7 +24,9 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the FilterCommand
      * and returns a FilterCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * @param args The arguments to parse.
+     * @return The resulting FilterCommand.
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public FilterCommand parse(String args) throws ParseException {
         requireNonNull(args);
@@ -37,16 +38,19 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_RATING, PREFIX_STATUS);
 
-        Optional<RatingFilter> ratingFilter = Optional.empty();
+        RatingFilter ratingFilter = null;
         if (argMultimap.getValue(PREFIX_RATING).isPresent()) {
-            ratingFilter = Optional.of(parseRatingFilter(argMultimap.getValue(PREFIX_RATING).get()));
+            ratingFilter = parseRatingFilter(argMultimap.getValue(PREFIX_RATING).get());
         }
 
-        Optional<String> statusFilter = argMultimap.getValue(PREFIX_STATUS);
+        String statusFilter = argMultimap.getValue(PREFIX_STATUS).orElse(null);
 
         return new FilterCommand(new PersonMatchesFiltersPredicate(ratingFilter, statusFilter));
     }
 
+    /**
+     * Parses the rating filter argument.
+     */
     private RatingFilter parseRatingFilter(String ratingArg) throws ParseException {
         Matcher matcher = RATING_FILTER_PATTERN.matcher(ratingArg.trim());
         if (!matcher.matches()) {
@@ -66,6 +70,9 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         return new RatingFilter(operator, value);
     }
 
+    /**
+     * Parses the operator string into a {@code RatingFilter.Operator}.
+     */
     private RatingFilter.Operator parseOperator(String operatorStr) {
         if (operatorStr == null || operatorStr.equals("==")) {
             return RatingFilter.Operator.EQUAL;

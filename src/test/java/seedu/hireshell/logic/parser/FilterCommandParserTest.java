@@ -6,8 +6,6 @@ import static seedu.hireshell.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.hireshell.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.hireshell.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-import java.util.Optional;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.hireshell.logic.commands.FilterCommand;
@@ -27,22 +25,22 @@ public class FilterCommandParserTest {
     public void parse_validArgs_returnsFilterCommand() {
         // rating only
         PersonMatchesFiltersPredicate predicateRating = new PersonMatchesFiltersPredicate(
-                Optional.of(new RatingFilter(RatingFilter.Operator.GREATER_THAN_OR_EQUAL, 7.0)),
-                Optional.empty());
+                new RatingFilter(RatingFilter.Operator.GREATER_THAN_OR_EQUAL, 7.0),
+                null);
         FilterCommand expectedFilterCommandRating = new FilterCommand(predicateRating);
         assertParseSuccess(parser, " " + PREFIX_RATING + ">= 7", expectedFilterCommandRating);
 
         // status only
         PersonMatchesFiltersPredicate predicateStatus = new PersonMatchesFiltersPredicate(
-                Optional.empty(),
-                Optional.of("Interviewing"));
+                null,
+                "Interviewing");
         FilterCommand expectedFilterCommandStatus = new FilterCommand(predicateStatus);
         assertParseSuccess(parser, " " + PREFIX_STATUS + "Interviewing", expectedFilterCommandStatus);
 
         // both rating and status
         PersonMatchesFiltersPredicate predicateBoth = new PersonMatchesFiltersPredicate(
-                Optional.of(new RatingFilter(RatingFilter.Operator.LESS_THAN, 5.5)),
-                Optional.of("Rejected"));
+                new RatingFilter(RatingFilter.Operator.LESS_THAN, 5.5),
+                "Rejected");
         FilterCommand expectedFilterCommandBoth = new FilterCommand(predicateBoth);
         assertParseSuccess(parser, " " + PREFIX_RATING + "< 5.5 " + PREFIX_STATUS + "Rejected", expectedFilterCommandBoth);
     }

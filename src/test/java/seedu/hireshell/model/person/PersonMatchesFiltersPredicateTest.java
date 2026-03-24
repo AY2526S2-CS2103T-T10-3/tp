@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashSet;
-import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,8 +14,8 @@ public class PersonMatchesFiltersPredicateTest {
     @Test
     public void test_matchesRating() {
         PersonMatchesFiltersPredicate predicate = new PersonMatchesFiltersPredicate(
-                Optional.of(new RatingFilter(RatingFilter.Operator.GREATER_THAN_OR_EQUAL, 7.0)),
-                Optional.empty());
+                new RatingFilter(RatingFilter.Operator.GREATER_THAN_OR_EQUAL, 7.0),
+                null);
 
         Person personWithRating7 = new Person(new Name("Alice"), new Phone("12345678"),
                 new Email("alice@example.com"), new Rating("7.0"), new Status("Applied"),
@@ -37,8 +36,8 @@ public class PersonMatchesFiltersPredicateTest {
     @Test
     public void test_matchesStatus() {
         PersonMatchesFiltersPredicate predicate = new PersonMatchesFiltersPredicate(
-                Optional.empty(),
-                Optional.of("Interviewing"));
+                null,
+                "Interviewing");
 
         Person personInterviewing = new Person(new Name("Alice"), new Phone("12345678"),
                 new Email("alice@example.com"), new Rating("7.0"), new Status("Interviewing"),
@@ -54,8 +53,8 @@ public class PersonMatchesFiltersPredicateTest {
     @Test
     public void test_matchesBoth() {
         PersonMatchesFiltersPredicate predicate = new PersonMatchesFiltersPredicate(
-                Optional.of(new RatingFilter(RatingFilter.Operator.LESS_THAN, 5.0)),
-                Optional.of("Rejected"));
+                new RatingFilter(RatingFilter.Operator.LESS_THAN, 5.0),
+                "Rejected");
 
         Person personRejectedPoorRating = new Person(new Name("Alice"), new Phone("12345678"),
                 new Email("alice@example.com"), new Rating("4.5"), new Status("Rejected"),

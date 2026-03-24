@@ -132,6 +132,10 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    /**
+     * Updates the comparator of the person list to sort by the given {@code comparator}.
+     * @param comparator The comparator used to sort the person list.
+     */
     @Override
     public void updateSortedPersonList(Comparator<Person> comparator) {
         requireNonNull(comparator);
