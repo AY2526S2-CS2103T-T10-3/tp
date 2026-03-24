@@ -282,9 +282,9 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("rating", rating)
                     .add("status", status)
-                    .add("roles", roles)
                     .add("referralStatus", referralStatus)
-                    .add("details", detail)
+                    .add("roles", roles)
+                    .add("detail", detail)
                     .toString();
         }
     }

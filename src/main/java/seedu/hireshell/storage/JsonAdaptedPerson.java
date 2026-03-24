@@ -137,7 +137,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Detail.class.getSimpleName()));
         }
         if (!Detail.isValidDetail(detail)) {
-            throw new IllegalValueException(Rating.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Detail.MESSAGE_CONSTRAINTS);
         }
         final Detail modelDetail = new Detail(detail);
 
