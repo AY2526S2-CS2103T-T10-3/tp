@@ -3,6 +3,10 @@ package seedu.hireshell.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.hireshell.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents additional details in the address book.
+ * Guarantees: is valid as declared in {@link #isValidDetail(String)}
+ */
 public class Detail {
     public static final String MESSAGE_CONSTRAINTS =
         "Description should only contain alphanumeric characters, spaces, and valid special symbols";
@@ -11,8 +15,7 @@ public class Detail {
      * Sanitizes <> and \ from the input
      * Allows blank strings
      */
-    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9\\s.,!@#$%^&*()\\-=_+\\[\\]{}|;:'\"/?]*$";;
-
+    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9\\s.,!@#$%^&*()\\-=_+\\[\\]{}|;:'\"/?]*$";
     public final String fullDetails;
 
     /**

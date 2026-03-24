@@ -163,9 +163,15 @@ public class ParserUtil {
         return ReferralStatus.fromString(trimmedReferralStatus);
     }
 
+    /**
+     * Parses a {@code String detail} into a {@code Detail}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code role} is invalid.
+     */
     public static Detail parseDetail(String detail) throws ParseException {
         requireNonNull(detail);
-        String trimmedDetail = detail.trim().toLowerCase();
+        String trimmedDetail = detail.trim();
 
         if (!Detail.isValidDetail(trimmedDetail)) {
             throw new ParseException(Detail.MESSAGE_CONSTRAINTS);

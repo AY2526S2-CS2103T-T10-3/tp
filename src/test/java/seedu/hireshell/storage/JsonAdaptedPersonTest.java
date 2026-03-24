@@ -161,7 +161,7 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_InvalidDetail_throwsIllegalValueException() {
+    public void toModelType_invalidDetail_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE,
                 VALID_EMAIL, VALID_RATING, VALID_STATUS, VALID_ROLES, INVALID_REFERRAL_STATUS, INVALID_DETAIL);
         String expectedMessage = Detail.MESSAGE_CONSTRAINTS;

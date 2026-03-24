@@ -147,7 +147,8 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(ReferralStatus.MESSAGE_CONSTRAINTS);
         }
 
-        return new Person(modelName, modelPhone, modelEmail, modelRating, modelStatus, modelRoles, modelReferralStatus, modelDetail);
+        return new Person(modelName, modelPhone, modelEmail, modelRating, modelStatus, modelRoles,
+                modelReferralStatus, modelDetail);
     }
 
 }
