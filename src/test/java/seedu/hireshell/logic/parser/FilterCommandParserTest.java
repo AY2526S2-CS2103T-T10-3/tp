@@ -1,5 +1,7 @@
 package seedu.hireshell.logic.parser;
 
+
+import static seedu.hireshell.logic.Messages.MESSAGE_DUPLICATE_FIELDS;
 import static seedu.hireshell.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.hireshell.logic.parser.CliSyntax.PREFIX_RATING;
 import static seedu.hireshell.logic.parser.CliSyntax.PREFIX_STATUS;
@@ -76,6 +78,6 @@ public class FilterCommandParserTest {
     @Test
     public void parse_multiplePrefixes_throwsParseException() {
         assertParseFailure(parser, " " + PREFIX_RATING + ">= 5 " + PREFIX_RATING + "< 8",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+                MESSAGE_DUPLICATE_FIELDS + PREFIX_RATING);
     }
 }

@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.hireshell.commons.core.GuiSettings;
 import seedu.hireshell.model.person.NameContainsKeywordsPredicate;
+import seedu.hireshell.model.person.Person;
 import seedu.hireshell.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {

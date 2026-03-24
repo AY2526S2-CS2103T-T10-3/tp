@@ -5,6 +5,7 @@ import static seedu.hireshell.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.Comparator;
+import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -157,7 +158,7 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons)
-                && sortedPersons.equals(otherModelManager.sortedPersons);
+                && Objects.equals(sortedPersons.getComparator(), otherModelManager.sortedPersons.getComparator());
     }
 
 }

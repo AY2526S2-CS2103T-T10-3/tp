@@ -1,6 +1,5 @@
 package seedu.hireshell.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
@@ -49,10 +48,10 @@ public class FilterCommandTest {
         assertEquals(filterCommand1, filterCommand2);
 
         // different types -> returns false
-        assertNotEquals(filterCommand1, 1);
+        assertNotEquals(1, filterCommand1);
 
         // null -> returns false
-        assertNotEquals(filterCommand1, null);
+        assertNotEquals(null, filterCommand1);
 
         // different predicate -> returns false
         assertNotEquals(filterCommand1, filterCommand3);
