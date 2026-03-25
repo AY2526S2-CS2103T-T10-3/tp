@@ -6,14 +6,14 @@ pageNav: 3
 
 # HireShell
 
-HireShell is a **desktop contact management application** designed for **Job Recruiters** who prefer **speed and efficiency** 
-in managing (e.g. adding, deleting, editing) a large number of applicant contacts. It combines a Command Line Interface 
+HireShell is a **desktop contact management application** designed for **Job Recruiters** who prefer **speed and efficiency**
+in managing (e.g. adding, deleting, editing) a large number of applicant contacts. It combines a Command Line Interface
 (CLI) with the clarity of a Graphical User Interface (GUI).
 
-If you are a Job Recruiter and are comfortable typing commands fast, HireShell helps you to organise, categorise and 
+If you are a Job Recruiter and are comfortable typing commands fast, HireShell helps you to organise, categorise and
 filter applicant contacts quickly, with minimal use of a mouse.
 
-Instead of clicking through multiple menus, you can perform all actions using simple, structured commands. 
+Instead of clicking through multiple menus, you can perform all actions using simple, structured commands.
 This lets you manage and review applicants more efficiently once you are familiar with the command format.
 
 **What you can expect**\
@@ -42,14 +42,14 @@ In this guide, you will find:
 
 5. Open a command terminal and navigate to the **HireShell** folder.
    - **Windows:** Use Command Prompt or PowerShell
-   - **Mac/Linux:** Use Terminal 
+   - **Mac/Linux:** Use Terminal
 
-Example: 
+Example:
 ```bash
 cd path/to/HireShell
 ```
 
-6. Run the application using the following command: 
+6. Run the application using the following command:
 ```
 java -jar hireshell.jar
 ```
