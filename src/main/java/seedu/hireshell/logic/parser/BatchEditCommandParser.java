@@ -2,6 +2,7 @@ package seedu.hireshell.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.hireshell.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.hireshell.logic.parser.CliSyntax.PREFIX_DETAILS;
 import static seedu.hireshell.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.hireshell.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.hireshell.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -110,6 +111,10 @@ public class BatchEditCommandParser implements Parser<BatchEditCommand> {
         if (editMultimap.getValue(PREFIX_REFERRAL_STATUS).isPresent()) {
             editPersonDescriptor.setReferralStatus(ParserUtil.parseReferralStatus(editMultimap
                     .getValue(PREFIX_REFERRAL_STATUS).get()));
+        }
+
+        if (editMultimap.getValue(PREFIX_DETAILS).isPresent()) {
+            editPersonDescriptor.setDetails(ParserUtil.parseDetail(editMultimap.getValue(PREFIX_DETAILS).get()));
         }
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {

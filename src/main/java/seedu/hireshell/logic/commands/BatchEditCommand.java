@@ -12,6 +12,7 @@ import seedu.hireshell.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.hireshell.logic.commands.exceptions.CommandException;
 import seedu.hireshell.model.Model;
 import seedu.hireshell.model.person.BatchPredicate;
+import seedu.hireshell.model.person.Details;
 import seedu.hireshell.model.person.Email;
 import seedu.hireshell.model.person.Name;
 import seedu.hireshell.model.person.Person;
@@ -94,9 +95,10 @@ public class BatchEditCommand extends Command {
         Set<Role> updatedRoles = editPersonDescriptor.getRoles().orElse(personToEdit.getRoles());
         ReferralStatus updatedReferralStatus = editPersonDescriptor.getReferralStatus()
                 .orElse(personToEdit.getReferralStatus());
+        Details updatedDetails = editPersonDescriptor.getDetails().orElse(personToEdit.getDetails());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedRating, updatedStatus, updatedRoles,
-                updatedReferralStatus);
+                updatedReferralStatus, updatedDetails);
     }
 
     @Override
