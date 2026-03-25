@@ -71,7 +71,7 @@ class JsonAdaptedPerson {
                 .map(JsonAdaptedRole::new)
                 .collect(Collectors.toList()));
         referralStatus = source.getReferralStatus().name();
-        detail = source.getDetail().fullDetails;
+        detail = source.getDetails().fullDetails;
     }
 
     /**

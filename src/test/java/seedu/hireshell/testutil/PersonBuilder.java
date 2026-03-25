@@ -61,7 +61,7 @@ public class PersonBuilder {
         roles = new HashSet<>(personToCopy.getRoles());
         status = personToCopy.getStatus();
         referralStatus = personToCopy.getReferralStatus();
-        details = personToCopy.getDetail();
+        details = personToCopy.getDetails();
     }
 
     /**

@@ -111,7 +111,7 @@ public class EditCommand extends Command {
         Set<Role> updatedRoles = editPersonDescriptor.getRoles().orElse(personToEdit.getRoles());
         ReferralStatus updatedReferralStatus = editPersonDescriptor.getReferralStatus()
                 .orElse(personToEdit.getReferralStatus());
-        Details updatedDetails = editPersonDescriptor.getDetail().orElse(personToEdit.getDetail());
+        Details updatedDetails = editPersonDescriptor.getDetails().orElse(personToEdit.getDetails());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedRating, updatedStatus, updatedRoles,
                 updatedReferralStatus, updatedDetails);
@@ -169,14 +169,14 @@ public class EditCommand extends Command {
             setStatus(toCopy.status);
             setRoles(toCopy.roles);
             setReferralStatus(toCopy.referralStatus);
-            setDetail(toCopy.details);
+            setDetails(toCopy.details);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, rating, status, roles, referralStatus);
+            return CollectionUtil.isAnyNonNull(name, phone, email, rating, status, roles, referralStatus, details);
         }
 
         public void setName(Name name) {
@@ -219,11 +219,11 @@ public class EditCommand extends Command {
             return Optional.ofNullable(status);
         }
 
-        public void setDetail(Details details) {
+        public void setDetails(Details details) {
             this.details = details;
         }
 
-        public Optional<Details> getDetail() {
+        public Optional<Details> getDetails() {
             return Optional.ofNullable(details);
         }
 

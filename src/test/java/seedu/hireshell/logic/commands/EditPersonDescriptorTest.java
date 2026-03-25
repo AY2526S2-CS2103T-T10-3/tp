@@ -68,7 +68,7 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getStatus().orElse(null) + ", referralStatus="
                 + editPersonDescriptor.getReferralStatus().orElse(null) + ", roles="
                 + editPersonDescriptor.getRoles().orElse(null) + ", details="
-                + editPersonDescriptor.getDetail().orElse(null) + "}";
+                + editPersonDescriptor.getDetails().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }
 }

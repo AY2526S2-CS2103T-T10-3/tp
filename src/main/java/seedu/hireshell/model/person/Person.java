@@ -76,7 +76,7 @@ public class Person {
         return referralStatus;
     }
 
-    public Details getDetail() {
+    public Details getDetails() {
         return details;
     }
 
