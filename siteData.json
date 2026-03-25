@@ -118,6 +118,8 @@
         "filtering-persons-by-rating-or-status-filter": "Filtering persons by rating or status: filter",
         "sorting-persons-by-rating-sort": "Sorting persons by rating: sort",
         "deleting-a-person-delete": "Deleting a person : delete",
+        "batch-deleting-persons-batch-delete": "Batch deleting persons : batch delete",
+        "batch-editing-persons-batch-edit": "Batch editing persons : batch edit",
         "clearing-all-entries-clear": "Clearing all entries : clear",
         "exiting-the-program-exit": "Exiting the program : exit",
         "saving-the-data": "Saving the data",
