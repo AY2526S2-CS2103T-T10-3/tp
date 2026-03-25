@@ -141,17 +141,18 @@ public class MainWindow extends UiPart<Stage> {
             detailedViewHeader.setText("[DETAILED VIEW: No one is selected]");
             detailedViewBody.setText("Please select a candidate from the list above to view their information.");
         } else {
-            detailedViewHeader.setText(String.format("[DETAILED VIEW: Selected #%d %s]", index, person.getName().toString()));
+            detailedViewHeader.setText(String.format("[DETAILED VIEW: Selected #%d %s]", index,
+                    person.getName().toString()));
 
             String rolesString = person.getRoles().stream()
                     .map(role -> role.roleName)
                     .collect(java.util.stream.Collectors.joining(", "));
 
-            detailedViewBody.setText("Information about " + person.getName().toString() + "\n" +
-                    "Role: " + rolesString + "\n" +
-                    "Contact: " + person.getPhone().toString() + "\n" +
-                    "Rating: " + person.getRating().toString() + "\n" +
-                    "Details: " + person.getDetails().toString());
+            detailedViewBody.setText("Information about " + person.getName().toString() + "\n"
+                    + "Role: " + rolesString + "\n"
+                    + "Contact: " + person.getPhone().toString() + "\n"
+                    + "Rating: " + person.getRating().toString() + "\n"
+                    + "Details: " + person.getDetails().toString());
         }
     }
 
