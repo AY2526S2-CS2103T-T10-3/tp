@@ -73,13 +73,14 @@ public class ExportCommand extends Command {
                 .collect(Collectors.joining(";"));
 
         return String.join(",",
-                escapeCsv(person.getName().fullName),
-                escapeCsv(person.getPhone().value),
-                escapeCsv(person.getEmail().value),
+                escapeCsv(person.getName().toString()),
+                escapeCsv(person.getPhone().toString()),
+                escapeCsv(person.getEmail().toString()),
                 escapeCsv(person.getRating().toString()),
-                escapeCsv(person.getStatus().value),
+                escapeCsv(person.getStatus().toString()),
                 escapeCsv(person.getReferralStatus().toString()),
-                escapeCsv(roles));
+                escapeCsv(roles),
+                escapeCsv(person.getDetails().toString()));
     }
 
     private String escapeCsv(String value) {
