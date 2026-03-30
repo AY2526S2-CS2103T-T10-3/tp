@@ -89,6 +89,23 @@ public class LogicManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
     }
 
+    @Test
+    public void getSelectedPerson_nullSelectedPerson_returnsNull() {
+        assertEquals(null, logic.getSelectedPerson());
+    }
+
+    @Test
+    public void setSelectedPerson_validPerson_setsSelectedPerson() {
+        logic.setSelectedPerson(AMY);
+        assertEquals(AMY, logic.getSelectedPerson());
+    }
+
+    @Test
+    public void selectedPersonProperty_get_returnsSelectedPerson() {
+        logic.setSelectedPerson(AMY);
+        assertEquals(AMY, logic.selectedPersonProperty().get());
+    }
+
     /**
      * Executes the command and confirms that
      * - no exceptions are thrown <br>
