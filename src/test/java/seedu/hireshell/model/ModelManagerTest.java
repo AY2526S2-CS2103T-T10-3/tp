@@ -109,6 +109,49 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getSelectedPerson_nullSelectedPerson_returnsNull() {
+        assertEquals(null, modelManager.getSelectedPerson());
+    }
+
+    @Test
+    public void setSelectedPerson_validPerson_setsSelectedPerson() {
+        modelManager.setSelectedPerson(ALICE);
+        assertEquals(ALICE, modelManager.getSelectedPerson());
+    }
+
+    @Test
+    public void deletePerson_selectedPersonDeleted_clearsSelectedPerson() {
+        modelManager.addPerson(ALICE);
+        modelManager.setSelectedPerson(ALICE);
+        modelManager.deletePerson(ALICE);
+        assertEquals(null, modelManager.getSelectedPerson());
+    }
+
+    @Test
+    public void setPerson_selectedPersonEdited_updatesSelectedPerson() {
+        modelManager.addPerson(ALICE);
+        modelManager.setSelectedPerson(ALICE);
+        modelManager.setPerson(ALICE, BENSON);
+        assertEquals(BENSON, modelManager.getSelectedPerson());
+    }
+
+    @Test
+    public void updateFilteredPersonList_selectedPersonFilteredOut_clearsSelectedPerson() {
+        modelManager.addPerson(ALICE);
+        modelManager.setSelectedPerson(ALICE);
+        modelManager.updateFilteredPersonList(person -> false);
+        assertEquals(null, modelManager.getSelectedPerson());
+    }
+
+    @Test
+    public void updateSortedPersonList_selectedPersonInList_remainsSelected() {
+        modelManager.addPerson(ALICE);
+        modelManager.setSelectedPerson(ALICE);
+        modelManager.updateSortedPersonList((p1, p2) -> 0);
+        assertEquals(ALICE, modelManager.getSelectedPerson());
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();

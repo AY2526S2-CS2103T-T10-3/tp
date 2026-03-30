@@ -89,6 +89,23 @@ public class LogicManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
     }
 
+    @Test
+    public void getSelectedPerson_nullSelectedPerson_returnsNull() {
+        assertEquals(null, logic.getSelectedPerson());
+    }
+
+    @Test
+    public void setSelectedPerson_validPerson_setsSelectedPerson() {
+        logic.setSelectedPerson(AMY);
+        assertEquals(AMY, logic.getSelectedPerson());
+    }
+
+    @Test
+    public void selectedPersonProperty_get_returnsSelectedPerson() {
+        logic.setSelectedPerson(AMY);
+        assertEquals(AMY, logic.selectedPersonProperty().get());
+    }
+
     /**
      * Executes the command and confirms that
      * - no exceptions are thrown <br>
@@ -170,7 +187,7 @@ public class LogicManagerTest {
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + RATING_DESC_AMY + STATUS_DESC_AMY + REFERRAL_STATUS_DESC_AMY;
 
-        Person expectedPerson = new PersonBuilder(AMY).withRoles().build();
+        Person expectedPerson = new PersonBuilder(AMY).withRoles().withDetail("").build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
