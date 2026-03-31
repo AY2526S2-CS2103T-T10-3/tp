@@ -54,23 +54,24 @@ public class PersonTest {
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertFalse(BOB.isSamePerson(editedBob));
     }
-@Test
-public void metadata_behavior() {
-    // Constructor with 8 arguments: createdAt should be around LocalDateTime.now()
-    LocalDateTime before = LocalDateTime.now().minusSeconds(1);
-    Person person = new PersonBuilder().buildWithDefaultConstructor();
-    LocalDateTime after = LocalDateTime.now().plusSeconds(1);
 
-    assertTrue(person.getCreatedAt().isAfter(before) || person.getCreatedAt().isEqual(before));
-    assertTrue(person.getCreatedAt().isBefore(after) || person.getCreatedAt().isEqual(after));
+    @Test
+    public void metadata_behavior() {
+        // Constructor with 8 arguments: createdAt should be around LocalDateTime.now()
+        LocalDateTime before = LocalDateTime.now().minusSeconds(1);
+        Person person = new PersonBuilder().buildWithDefaultConstructor();
+        LocalDateTime after = LocalDateTime.now().plusSeconds(1);
 
-    // Constructor with 9 arguments: createdAt preserved
-    LocalDateTime fixedCreatedAt = LocalDateTime.of(2020, 1, 1, 12, 0);
-    Person editedPerson = new Person(person.getName(), person.getPhone(), person.getEmail(), person.getRating(),
-            person.getStatus(), person.getRoles(), person.getReferralStatus(), person.getDetails(), fixedCreatedAt);
+        assertTrue(person.getCreatedAt().isAfter(before) || person.getCreatedAt().isEqual(before));
+        assertTrue(person.getCreatedAt().isBefore(after) || person.getCreatedAt().isEqual(after));
 
-    assertEquals(fixedCreatedAt, editedPerson.getCreatedAt());
-}
+        // Constructor with 9 arguments: createdAt preserved
+        LocalDateTime fixedCreatedAt = LocalDateTime.of(2020, 1, 1, 12, 0);
+        Person editedPerson = new Person(person.getName(), person.getPhone(), person.getEmail(), person.getRating(),
+                person.getStatus(), person.getRoles(), person.getReferralStatus(), person.getDetails(), fixedCreatedAt);
+
+        assertEquals(fixedCreatedAt, editedPerson.getCreatedAt());
+    }
 
     @Test
     public void equals() {
