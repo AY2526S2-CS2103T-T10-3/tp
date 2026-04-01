@@ -5,17 +5,20 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.hireshell.model.person.PersonMatchesFiltersPredicate.DateFilter;
 import seedu.hireshell.model.person.PersonMatchesFiltersPredicate.RatingFilter;
 
 public class PersonMatchesFiltersPredicateTest {
 
     @Test
     public void test_matchesRating() {
-        // GREATER_THAN_OR_EQUAL (already tested, but for completeness)
+        // GREATER_THAN_OR_EQUAL
         PersonMatchesFiltersPredicate predicate = new PersonMatchesFiltersPredicate(
                 new RatingFilter(RatingFilter.Operator.GREATER_THAN_OR_EQUAL, 7.0),
                 null, null);
@@ -81,45 +84,94 @@ public class PersonMatchesFiltersPredicateTest {
     }
 
     @Test
-    public void test_matchesBoth() {
+    public void test_matchesDate() {
+        LocalDate filterDate = LocalDate.of(2026, 4, 1);
         PersonMatchesFiltersPredicate predicate = new PersonMatchesFiltersPredicate(
-                new RatingFilter(RatingFilter.Operator.LESS_THAN, 5.0),
-                "Rejected", null);
+                null, null,
+                new DateFilter(DateFilter.Operator.BEFORE, filterDate));
 
-        Person personRejectedPoorRating = new Person(new Name("Alice"), new Phone("12345678"),
-                new Email("alice@example.com"), new Rating("4.5"), new Status("Rejected"),
-                new HashSet<>(), ReferralStatus.fromString("yes"), new Details("valid details"));
-        assertTrue(predicate.test(personRejectedPoorRating));
+        Person personBefore = new Person(new Name("Alice"), new Phone("12345678"),
+                new Email("alice@example.com"), new Rating("7.0"), new Status("Applied"),
+                new HashSet<>(), ReferralStatus.fromString("yes"), new Details("valid details"),
+                LocalDateTime.of(2026, 3, 31, 23, 59));
+        assertTrue(predicate.test(personBefore));
 
-        Person personRejectedGoodRating = new Person(new Name("Bob"), new Phone("87654321"),
-                new Email("bob@example.com"), new Rating("8.5"), new Status("Rejected"),
-                new HashSet<>(), ReferralStatus.fromString("yes"), new Details("valid details"));
-        assertFalse(predicate.test(personRejectedGoodRating));
+        Person personSameDay = new Person(new Name("Bob"), new Phone("87654321"),
+                new Email("bob@example.com"), new Rating("8.5"), new Status("Applied"),
+                new HashSet<>(), ReferralStatus.fromString("yes"), new Details("valid details"),
+                LocalDateTime.of(2026, 4, 1, 0, 0));
+        assertFalse(predicate.test(personSameDay));
+
+        predicate = new PersonMatchesFiltersPredicate(
+                null, null,
+                new DateFilter(DateFilter.Operator.AFTER, filterDate));
+        assertTrue(predicate.test(new Person(new Name("Charlie"), new Phone("11111111"),
+                new Email("charlie@example.com"), new Rating("4.5"), new Status("Applied"),
+                new HashSet<>(), ReferralStatus.fromString("yes"), new Details("valid details"),
+                LocalDateTime.of(2026, 4, 2, 0, 0))));
+    }
+
+    @Test
+    public void test_matchesAll() {
+        PersonMatchesFiltersPredicate predicate = new PersonMatchesFiltersPredicate(
+                new RatingFilter(RatingFilter.Operator.GREATER_THAN, 8.0),
+                "Accepted",
+                new DateFilter(DateFilter.Operator.AFTER, LocalDate.of(2026, 1, 1)));
+
+        Person personMatch = new Person(new Name("Alice"), new Phone("12345678"),
+                new Email("alice@example.com"), new Rating("8.5"), new Status("Accepted"),
+                new HashSet<>(), ReferralStatus.fromString("yes"), new Details("valid details"),
+                LocalDateTime.of(2026, 2, 1, 0, 0));
+        assertTrue(predicate.test(personMatch));
+
+        // Rating mismatch
+        Person personRatingMismatch = new Person(new Name("Bob"), new Phone("87654321"),
+                new Email("bob@example.com"), new Rating("7.5"), new Status("Accepted"),
+                new HashSet<>(), ReferralStatus.fromString("yes"), new Details("valid details"),
+                LocalDateTime.of(2026, 2, 1, 0, 0));
+        assertFalse(predicate.test(personRatingMismatch));
+
+        // Status mismatch
+        Person personStatusMismatch = new Person(new Name("Charlie"), new Phone("11111111"),
+                new Email("charlie@example.com"), new Rating("8.5"), new Status("Applied"),
+                new HashSet<>(), ReferralStatus.fromString("yes"), new Details("valid details"),
+                LocalDateTime.of(2026, 2, 1, 0, 0));
+        assertFalse(predicate.test(personStatusMismatch));
+
+        // Date mismatch
+        Person personDateMismatch = new Person(new Name("David"), new Phone("22222222"),
+                new Email("david@example.com"), new Rating("8.5"), new Status("Accepted"),
+                new HashSet<>(), ReferralStatus.fromString("yes"), new Details("valid details"),
+                LocalDateTime.of(2025, 12, 31, 23, 59));
+        assertFalse(predicate.test(personDateMismatch));
     }
 
     @Test
     public void test_equals() {
-        RatingFilter ratingFilter1 = new RatingFilter(RatingFilter.Operator.EQUAL, 5.0);
-        RatingFilter ratingFilter2 = new RatingFilter(RatingFilter.Operator.EQUAL, 5.0);
-        RatingFilter ratingFilter3 = new RatingFilter(RatingFilter.Operator.GREATER_THAN, 5.0);
+        RatingFilter ratingFilter = new RatingFilter(RatingFilter.Operator.EQUAL, 5.0);
+        DateFilter dateFilter = new DateFilter(DateFilter.Operator.BEFORE, LocalDate.of(2026, 1, 1));
 
-        // RatingFilter equals
-        assertEquals(ratingFilter1, ratingFilter1);
-        assertEquals(ratingFilter1, ratingFilter2);
-        assertNotEquals(ratingFilter1, ratingFilter3);
-        assertNotEquals(ratingFilter1, null);
-        assertNotEquals(ratingFilter1, "string");
+        // DateFilter equals
+        DateFilter dateFilterSame = new DateFilter(DateFilter.Operator.BEFORE, LocalDate.of(2026, 1, 1));
+        DateFilter dateFilterDiff = new DateFilter(DateFilter.Operator.AFTER, LocalDate.of(2026, 1, 1));
+        assertEquals(dateFilter, dateFilter);
+        assertEquals(dateFilter, dateFilterSame);
+        assertNotEquals(dateFilter, dateFilterDiff);
+        assertNotEquals(dateFilter, null);
+        assertNotEquals(dateFilter, "string");
 
-        PersonMatchesFiltersPredicate predicate1 = new PersonMatchesFiltersPredicate(ratingFilter1, "status", null);
-        PersonMatchesFiltersPredicate predicate2 = new PersonMatchesFiltersPredicate(ratingFilter1, "status", null);
-        PersonMatchesFiltersPredicate predicate3 = new PersonMatchesFiltersPredicate(ratingFilter3, "status", null);
-        PersonMatchesFiltersPredicate predicate4 = new PersonMatchesFiltersPredicate(ratingFilter1, "other", null);
+        PersonMatchesFiltersPredicate predicate1 = new PersonMatchesFiltersPredicate(ratingFilter, "status", dateFilter);
+        PersonMatchesFiltersPredicate predicate2 = new PersonMatchesFiltersPredicate(ratingFilter, "status", dateFilter);
+        PersonMatchesFiltersPredicate predicate3 = new PersonMatchesFiltersPredicate(null, "status", dateFilter);
+        PersonMatchesFiltersPredicate predicate4 = new PersonMatchesFiltersPredicate(ratingFilter, null, dateFilter);
+        PersonMatchesFiltersPredicate predicate5 = new PersonMatchesFiltersPredicate(ratingFilter, "status", null);
 
         // PersonMatchesFiltersPredicate equals
         assertEquals(predicate1, predicate1);
         assertEquals(predicate1, predicate2);
         assertNotEquals(predicate1, predicate3);
         assertNotEquals(predicate1, predicate4);
+        assertNotEquals(predicate1, predicate5);
         assertNotEquals(predicate1, null);
         assertNotEquals(predicate1, "string");
     }
@@ -127,10 +179,11 @@ public class PersonMatchesFiltersPredicateTest {
     @Test
     public void test_toString() {
         RatingFilter ratingFilter = new RatingFilter(RatingFilter.Operator.EQUAL, 5.0);
-        PersonMatchesFiltersPredicate predicate = new PersonMatchesFiltersPredicate(ratingFilter, "status", null);
+        DateFilter dateFilter = new DateFilter(DateFilter.Operator.BEFORE, LocalDate.of(2026, 1, 1));
+        PersonMatchesFiltersPredicate predicate = new PersonMatchesFiltersPredicate(ratingFilter, "status", dateFilter);
 
         String expected = PersonMatchesFiltersPredicate.class.getCanonicalName()
-                + "{ratingFilter=" + ratingFilter + ", statusFilter=status, dateFilter=null}";
+                + "{ratingFilter=" + ratingFilter + ", statusFilter=status, dateFilter=" + dateFilter + "}";
         assertEquals(expected, predicate.toString());
     }
 }
