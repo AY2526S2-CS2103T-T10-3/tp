@@ -175,12 +175,14 @@ Format: `filter [rt/RATING_FILTER] [s/STATUS] [dt/DATE_FILTER]`
 * At least one of the optional fields must be provided.
 * `RATING_FILTER` can include a comparison operator (`>`, `>=`, `<`, `<=`, `==`) followed by a number. If no operator is provided, `==` is assumed.
 * `STATUS` matches the status field of the person (case-insensitive).
-* `DATE_FILTER` must be in the format `before DATE` or `after DATE` (where `DATE` is in `YYYY-MM-DD` format).
+* `DATE_FILTER` can include an operator (`before`, `after`, `on`) followed by a date in `YYYY-MM-DD` format. If no operator is provided, `on` is assumed.
 * If multiple criteria are provided, only persons matching **all** of them will be shown.
 
 Examples:
 * `filter rt/ >= 7` returns persons with a rating of 7.0 or higher.
 * `filter s/Interviewing` returns persons whose status is "Interviewing".
+* `filter dt/on 2026-04-01` returns persons added on April 1st, 2026.
+* `filter dt/2026-04-01` also returns persons added on April 1st, 2026 (defaults to `on`).
 * `filter dt/after 2026-01-01` returns persons added after January 1st, 2026.
 * `filter rt/ < 5 s/Rejected dt/before 2026-03-01` returns persons with a rating less than 5.0, a status of "Rejected", and added before March 1st, 2026.
 

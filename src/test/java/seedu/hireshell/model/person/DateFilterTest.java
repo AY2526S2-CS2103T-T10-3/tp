@@ -37,4 +37,18 @@ public class DateFilterTest {
         // Date after
         assertTrue(filter.test(LocalDateTime.of(2026, 4, 2, 0, 0)));
     }
+
+    @Test
+    public void test_equal() {
+        LocalDate filterDate = LocalDate.of(2026, 4, 1);
+        DateFilter filter = new DateFilter(DateFilter.Operator.EQUAL, filterDate);
+
+        // Date before
+        assertFalse(filter.test(LocalDateTime.of(2026, 3, 31, 23, 59)));
+        // Same date
+        assertTrue(filter.test(LocalDateTime.of(2026, 4, 1, 0, 0)));
+        assertTrue(filter.test(LocalDateTime.of(2026, 4, 1, 15, 30)));
+        // Date after
+        assertFalse(filter.test(LocalDateTime.of(2026, 4, 2, 0, 0)));
+    }
 }

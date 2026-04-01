@@ -67,6 +67,15 @@ public class FilterCommandParserTest {
                 new FilterCommand(new PersonMatchesFiltersPredicate(null, null,
                         new DateFilter(DateFilter.Operator.AFTER, LocalDate.of(2026, 4, 1)))));
 
+        assertParseSuccess(parser, " " + PREFIX_DATE + "on 2026-04-01",
+                new FilterCommand(new PersonMatchesFiltersPredicate(null, null,
+                        new DateFilter(DateFilter.Operator.EQUAL, LocalDate.of(2026, 4, 1)))));
+
+        // default date operator (on)
+        assertParseSuccess(parser, " " + PREFIX_DATE + " 2026-04-01",
+                new FilterCommand(new PersonMatchesFiltersPredicate(null, null,
+                        new DateFilter(DateFilter.Operator.EQUAL, LocalDate.of(2026, 4, 1)))));
+
         // both rating and status
         PersonMatchesFiltersPredicate predicateBoth = new PersonMatchesFiltersPredicate(
                 new RatingFilter(RatingFilter.Operator.LESS_THAN, 5.5),
@@ -97,9 +106,9 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_invalidDate_throwsParseException() {
-        // missing operator
-        assertParseFailure(parser, " " + PREFIX_DATE + "2026-04-01",
-                "Date filter must be in the format: before/after DATE (YYYY-MM-DD)");
+        // missing value
+        assertParseFailure(parser, " " + PREFIX_DATE + "before ",
+                "Date value cannot be empty. Format: [before/after/on] DATE (YYYY-MM-DD)");
 
         // invalid date format
         assertParseFailure(parser, " " + PREFIX_DATE + "before 01-04-2026",
@@ -107,7 +116,7 @@ public class FilterCommandParserTest {
 
         // invalid operator
         assertParseFailure(parser, " " + PREFIX_DATE + "between 2026-04-01",
-                "Date filter must be in the format: before/after DATE (YYYY-MM-DD)");
+                "Date filter format is: [before/after/on] DATE (YYYY-MM-DD)");
     }
 
     @Test

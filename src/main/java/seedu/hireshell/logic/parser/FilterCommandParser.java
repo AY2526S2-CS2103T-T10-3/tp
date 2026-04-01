@@ -24,7 +24,7 @@ import seedu.hireshell.model.person.Rating;
 public class FilterCommandParser implements Parser<FilterCommand> {
 
     private static final Pattern RATING_FILTER_PATTERN = Pattern.compile("(?<operator>[><]=?|==)?\\s*(?<value>.*)");
-    private static final Pattern DATE_FILTER_PATTERN = Pattern.compile("(?<operator>before|after)\\s+(?<value>.*)");
+    private static final Pattern DATE_FILTER_PATTERN = Pattern.compile("(?<operator>before|after|on)?\\s*(?<value>.*)");
 
     /**
      * Parses the given {@code String} of arguments in the context of the FilterCommand
@@ -87,21 +87,31 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     private DateFilter parseDateFilter(String dateArg) throws ParseException {
         Matcher matcher = DATE_FILTER_PATTERN.matcher(dateArg.trim().toLowerCase());
         if (!matcher.matches()) {
-            throw new ParseException("Date filter must be in the format: before/after DATE (YYYY-MM-DD)");
+            throw new ParseException("Date filter format is: [before/after/on] DATE (YYYY-MM-DD)");
         }
 
         String operatorStr = matcher.group("operator");
         String valueStr = matcher.group("value");
 
+        if (valueStr == null || valueStr.isEmpty()) {
+            throw new ParseException("Date value cannot be empty. Format: [before/after/on] DATE (YYYY-MM-DD)");
+        }
+
         LocalDate date;
         try {
-            date = LocalDate.parse(valueStr);
+            date = LocalDate.parse(valueStr.trim());
         } catch (DateTimeParseException e) {
             throw new ParseException("Invalid date format! Use YYYY-MM-DD");
         }
 
-        DateFilter.Operator operator = operatorStr.equals("before")
-                ? DateFilter.Operator.BEFORE : DateFilter.Operator.AFTER;
+        DateFilter.Operator operator;
+        if (operatorStr == null || operatorStr.equals("on")) {
+            operator = DateFilter.Operator.EQUAL;
+        } else if (operatorStr.equals("before")) {
+            operator = DateFilter.Operator.BEFORE;
+        } else {
+            operator = DateFilter.Operator.AFTER;
+        }
 
         return new DateFilter(operator, date);
     }

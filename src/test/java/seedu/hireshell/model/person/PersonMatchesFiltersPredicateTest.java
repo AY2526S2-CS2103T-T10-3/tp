@@ -102,6 +102,7 @@ public class PersonMatchesFiltersPredicateTest {
                 LocalDateTime.of(2026, 4, 1, 0, 0));
         assertFalse(predicate.test(personSameDay));
 
+        // AFTER
         predicate = new PersonMatchesFiltersPredicate(
                 null, null,
                 new DateFilter(DateFilter.Operator.AFTER, filterDate));
@@ -109,6 +110,13 @@ public class PersonMatchesFiltersPredicateTest {
                 new Email("charlie@example.com"), new Rating("4.5"), new Status("Applied"),
                 new HashSet<>(), ReferralStatus.fromString("yes"), new Details("valid details"),
                 LocalDateTime.of(2026, 4, 2, 0, 0))));
+
+        // EQUAL
+        predicate = new PersonMatchesFiltersPredicate(
+                null, null,
+                new DateFilter(DateFilter.Operator.EQUAL, filterDate));
+        assertTrue(predicate.test(personSameDay));
+        assertFalse(predicate.test(personBefore));
     }
 
     @Test
@@ -154,9 +162,11 @@ public class PersonMatchesFiltersPredicateTest {
         // DateFilter equals
         DateFilter dateFilterSame = new DateFilter(DateFilter.Operator.BEFORE, LocalDate.of(2026, 1, 1));
         DateFilter dateFilterDiff = new DateFilter(DateFilter.Operator.AFTER, LocalDate.of(2026, 1, 1));
+        DateFilter dateFilterEqual = new DateFilter(DateFilter.Operator.EQUAL, LocalDate.of(2026, 1, 1));
         assertEquals(dateFilter, dateFilter);
         assertEquals(dateFilter, dateFilterSame);
         assertNotEquals(dateFilter, dateFilterDiff);
+        assertNotEquals(dateFilter, dateFilterEqual);
         assertNotEquals(dateFilter, null);
         assertNotEquals(dateFilter, "string");
 

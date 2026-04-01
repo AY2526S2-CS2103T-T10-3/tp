@@ -89,7 +89,7 @@ public class PersonMatchesFiltersPredicate implements Predicate<Person> {
          * Operators for date comparison.
          */
         public enum Operator {
-            BEFORE, AFTER
+            BEFORE, AFTER, EQUAL
         }
 
         private final Operator operator;
@@ -98,7 +98,7 @@ public class PersonMatchesFiltersPredicate implements Predicate<Person> {
         /**
          * Constructs a {@code DateFilter}.
          *
-         * @param operator The comparison operator (BEFORE or AFTER).
+         * @param operator The comparison operator (BEFORE, AFTER, or EQUAL).
          * @param date The date to compare against.
          */
         public DateFilter(Operator operator, LocalDate date) {
@@ -114,10 +114,15 @@ public class PersonMatchesFiltersPredicate implements Predicate<Person> {
          */
         public boolean test(LocalDateTime dateTime) {
             LocalDate targetDate = dateTime.toLocalDate();
-            if (operator == Operator.BEFORE) {
+            switch (operator) {
+            case BEFORE:
                 return targetDate.isBefore(date);
-            } else {
+            case AFTER:
                 return targetDate.isAfter(date);
+            case EQUAL:
+                return targetDate.isEqual(date);
+            default:
+                return false;
             }
         }
 
