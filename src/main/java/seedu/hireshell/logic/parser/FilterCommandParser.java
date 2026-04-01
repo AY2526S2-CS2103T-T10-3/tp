@@ -24,7 +24,7 @@ import seedu.hireshell.model.person.Rating;
 public class FilterCommandParser implements Parser<FilterCommand> {
 
     private static final Pattern RATING_FILTER_PATTERN = Pattern.compile("(?<operator>[><]=?|==)?\\s*(?<value>.*)");
-    private static final Pattern DATE_FILTER_PATTERN = Pattern.compile("(?<operator>before|after|on)?\\s*(?<value>.*)");
+    private static final Pattern DATE_FILTER_PATTERN = Pattern.compile("(?<operator>before|after|on)\\s+(?<value>.*)");
 
     /**
      * Parses the given {@code String} of arguments in the context of the FilterCommand
@@ -85,35 +85,40 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      * Parses the date filter argument.
      */
     private DateFilter parseDateFilter(String dateArg) throws ParseException {
-        Matcher matcher = DATE_FILTER_PATTERN.matcher(dateArg.trim().toLowerCase());
-        if (!matcher.matches()) {
+        String trimmedDateArg = dateArg.trim().toLowerCase();
+        // Try matching operator first
+        Matcher matcher = DATE_FILTER_PATTERN.matcher(trimmedDateArg);
+        if (matcher.matches()) {
+            String operatorStr = matcher.group("operator");
+            String valueStr = matcher.group("value").trim();
+            if (valueStr.isEmpty()) {
+                throw new ParseException("Date value cannot be empty. Format: [before/after/on] DATE (YYYY-MM-DD)");
+            }
+            LocalDate date;
+            try {
+                date = LocalDate.parse(valueStr);
+            } catch (DateTimeParseException e) {
+                throw new ParseException("Invalid date format! Use YYYY-MM-DD");
+            }
+            DateFilter.Operator operator = operatorStr.equals("before")
+                    ? DateFilter.Operator.BEFORE : operatorStr.equals("after")
+                    ? DateFilter.Operator.AFTER : DateFilter.Operator.EQUAL;
+            return new DateFilter(operator, date);
+        }
+
+        // Check if it's just a date without operator (default to EQUAL)
+        try {
+            LocalDate date = LocalDate.parse(trimmedDateArg);
+            return new DateFilter(DateFilter.Operator.EQUAL, date);
+        } catch (DateTimeParseException e) {
+            // Check if it starts with an operator but has no value
+            for (String op : new String[]{"before", "after", "on"}) {
+                if (trimmedDateArg.equals(op) || trimmedDateArg.startsWith(op + " ")) {
+                    throw new ParseException("Date value cannot be empty. Format: [before/after/on] DATE (YYYY-MM-DD)");
+                }
+            }
             throw new ParseException("Date filter format is: [before/after/on] DATE (YYYY-MM-DD)");
         }
-
-        String operatorStr = matcher.group("operator");
-        String valueStr = matcher.group("value");
-
-        if (valueStr == null || valueStr.isEmpty()) {
-            throw new ParseException("Date value cannot be empty. Format: [before/after/on] DATE (YYYY-MM-DD)");
-        }
-
-        LocalDate date;
-        try {
-            date = LocalDate.parse(valueStr.trim());
-        } catch (DateTimeParseException e) {
-            throw new ParseException("Invalid date format! Use YYYY-MM-DD");
-        }
-
-        DateFilter.Operator operator;
-        if (operatorStr == null || operatorStr.equals("on")) {
-            operator = DateFilter.Operator.EQUAL;
-        } else if (operatorStr.equals("before")) {
-            operator = DateFilter.Operator.BEFORE;
-        } else {
-            operator = DateFilter.Operator.AFTER;
-        }
-
-        return new DateFilter(operator, date);
     }
 
     /**
