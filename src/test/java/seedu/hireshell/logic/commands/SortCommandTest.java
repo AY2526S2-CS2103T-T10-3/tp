@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.hireshell.commons.core.GuiSettings;
+import seedu.hireshell.commons.util.ToStringBuilder;
 import seedu.hireshell.model.Model;
 import seedu.hireshell.model.ReadOnlyAddressBook;
 import seedu.hireshell.model.ReadOnlyUserPrefs;
@@ -23,20 +24,28 @@ public class SortCommandTest {
     @Test
     public void execute_sortSuccessful() {
         ModelStubAcceptingComparator modelStub = new ModelStubAcceptingComparator();
-        SortCommand sortCommand = new SortCommand(true); // ascending
 
+        // Rating sort ascending
+        SortCommand sortCommand = new SortCommand(true, SortCommand.SortType.RATING);
         CommandResult commandResult = sortCommand.execute(modelStub);
+        assertEquals(String.format(SortCommand.MESSAGE_SUCCESS, "rating", "ascending"),
+                commandResult.getFeedbackToUser());
+        requireNonNull(modelStub.comparatorUsed);
 
-        assertEquals(String.format(SortCommand.MESSAGE_SUCCESS, "ascending"),
+        // Date sort descending
+        sortCommand = new SortCommand(false, SortCommand.SortType.DATE);
+        commandResult = sortCommand.execute(modelStub);
+        assertEquals(String.format(SortCommand.MESSAGE_SUCCESS, "date", "descending"),
                 commandResult.getFeedbackToUser());
         requireNonNull(modelStub.comparatorUsed);
     }
 
     @Test
     public void equals() {
-        SortCommand sortCommand1 = new SortCommand(true); // ascending
-        SortCommand sortCommand2 = new SortCommand(true); // ascending
-        SortCommand sortCommand3 = new SortCommand(false); // descending
+        SortCommand sortCommand1 = new SortCommand(true, SortCommand.SortType.RATING);
+        SortCommand sortCommand2 = new SortCommand(true, SortCommand.SortType.RATING);
+        SortCommand sortCommand3 = new SortCommand(false, SortCommand.SortType.RATING);
+        SortCommand sortCommand4 = new SortCommand(true, SortCommand.SortType.DATE);
 
         // same object -> returns true
         assertEquals(sortCommand1, sortCommand1);
@@ -52,6 +61,19 @@ public class SortCommandTest {
 
         // different order -> returns false
         assertNotEquals(sortCommand1, sortCommand3);
+
+        // different sort type -> returns false
+        assertNotEquals(sortCommand1, sortCommand4);
+    }
+
+    @Test
+    public void test_toString() {
+        SortCommand sortCommand = new SortCommand(true, SortCommand.SortType.RATING);
+        String expected = new ToStringBuilder(sortCommand)
+                .add("isAscending", true)
+                .add("sortType", SortCommand.SortType.RATING)
+                .toString();
+        assertEquals(expected, sortCommand.toString());
     }
 
     /**
