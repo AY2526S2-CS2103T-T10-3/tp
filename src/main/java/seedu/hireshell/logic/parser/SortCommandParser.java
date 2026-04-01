@@ -1,9 +1,13 @@
 package seedu.hireshell.logic.parser;
 
 import static seedu.hireshell.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.hireshell.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.hireshell.logic.parser.CliSyntax.PREFIX_RATING;
 
+import java.util.Optional;
+
 import seedu.hireshell.logic.commands.SortCommand;
+import seedu.hireshell.logic.commands.SortCommand.SortType;
 import seedu.hireshell.logic.parser.exceptions.ParseException;
 
 /**
@@ -19,22 +23,38 @@ public class SortCommandParser implements Parser<SortCommand> {
      * @throws ParseException if the user input does not conform the expected format.
      */
     public SortCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_RATING);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_RATING, PREFIX_DATE);
 
-        if (!argMultimap.getValue(PREFIX_RATING).isPresent() || !argMultimap.getPreamble().isEmpty()) {
+        Optional<String> ratingOrder = argMultimap.getValue(PREFIX_RATING);
+        Optional<String> dateOrder = argMultimap.getValue(PREFIX_DATE);
+
+        if (ratingOrder.isPresent() && dateOrder.isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 
-        String sortOrder = argMultimap.getValue(PREFIX_RATING).get().trim().toLowerCase();
+        SortType sortType;
+        String orderStr;
+
+        if (ratingOrder.isPresent()) {
+            sortType = SortType.RATING;
+            orderStr = ratingOrder.get();
+        } else if (dateOrder.isPresent()) {
+            sortType = SortType.DATE;
+            orderStr = dateOrder.get();
+        } else {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        }
+
         boolean isAscending;
-        if (sortOrder.equals("asc")) {
+        orderStr = orderStr.trim().toLowerCase();
+        if (orderStr.equals("asc")) {
             isAscending = true;
-        } else if (sortOrder.equals("desc")) {
+        } else if (orderStr.equals("desc")) {
             isAscending = false;
         } else {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 
-        return new SortCommand(isAscending);
+        return new SortCommand(isAscending, sortType);
     }
 }

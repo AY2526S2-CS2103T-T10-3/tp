@@ -21,14 +21,14 @@ public class SortCommandParserTest {
     @Test
     public void parse_validArgs_returnsSortCommand() {
         // ascending
-        assertParseSuccess(parser, " " + PREFIX_RATING + "asc", new SortCommand(true));
+        assertParseSuccess(parser, " " + PREFIX_RATING + "asc", new SortCommand(true, SortCommand.SortType.RATING));
 
         // descending
-        assertParseSuccess(parser, " " + PREFIX_RATING + "desc", new SortCommand(false));
+        assertParseSuccess(parser, " " + PREFIX_RATING + "desc", new SortCommand(false, SortCommand.SortType.RATING));
 
         // case insensitive
-        assertParseSuccess(parser, " " + PREFIX_RATING + "ASC", new SortCommand(true));
-        assertParseSuccess(parser, " " + PREFIX_RATING + "Desc", new SortCommand(false));
+        assertParseSuccess(parser, " " + PREFIX_RATING + "ASC", new SortCommand(true, SortCommand.SortType.RATING));
+        assertParseSuccess(parser, " " + PREFIX_RATING + "Desc", new SortCommand(false, SortCommand.SortType.RATING));
     }
 
     @Test

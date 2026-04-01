@@ -18,7 +18,7 @@ public class PersonMatchesFiltersPredicateTest {
         // GREATER_THAN_OR_EQUAL (already tested, but for completeness)
         PersonMatchesFiltersPredicate predicate = new PersonMatchesFiltersPredicate(
                 new RatingFilter(RatingFilter.Operator.GREATER_THAN_OR_EQUAL, 7.0),
-                null);
+                null, null);
 
         Person personWithRating7 = new Person(new Name("Alice"), new Phone("12345678"),
                 new Email("alice@example.com"), new Rating("7.0"), new Status("Applied"),
@@ -28,7 +28,7 @@ public class PersonMatchesFiltersPredicateTest {
         // GREATER_THAN
         predicate = new PersonMatchesFiltersPredicate(
                 new RatingFilter(RatingFilter.Operator.GREATER_THAN, 7.0),
-                null);
+                null, null);
         assertFalse(predicate.test(personWithRating7));
         Person personWithRating8 = new Person(new Name("Bob"), new Phone("87654321"),
                 new Email("bob@example.com"), new Rating("8.5"), new Status("Applied"),
@@ -38,7 +38,7 @@ public class PersonMatchesFiltersPredicateTest {
         // LESS_THAN
         predicate = new PersonMatchesFiltersPredicate(
                 new RatingFilter(RatingFilter.Operator.LESS_THAN, 5.0),
-                null);
+                null, null);
         Person personWithRating4 = new Person(new Name("Charlie"), new Phone("11111111"),
                 new Email("charlie@example.com"), new Rating("4.5"), new Status("Applied"),
                 new HashSet<>(), ReferralStatus.fromString("yes"), new Details("valid details"));
@@ -48,7 +48,7 @@ public class PersonMatchesFiltersPredicateTest {
         // LESS_THAN_OR_EQUAL
         predicate = new PersonMatchesFiltersPredicate(
                 new RatingFilter(RatingFilter.Operator.LESS_THAN_OR_EQUAL, 5.0),
-                null);
+                null, null);
         Person personWithRating5 = new Person(new Name("David"), new Phone("22222222"),
                 new Email("david@example.com"), new Rating("5.0"), new Status("Applied"),
                 new HashSet<>(), ReferralStatus.fromString("yes"), new Details("valid details"));
@@ -58,7 +58,7 @@ public class PersonMatchesFiltersPredicateTest {
         // EQUAL
         predicate = new PersonMatchesFiltersPredicate(
                 new RatingFilter(RatingFilter.Operator.EQUAL, 8.5),
-                null);
+                null, null);
         assertTrue(predicate.test(personWithRating8));
         assertFalse(predicate.test(personWithRating7));
     }
@@ -67,7 +67,7 @@ public class PersonMatchesFiltersPredicateTest {
     public void test_matchesStatus() {
         PersonMatchesFiltersPredicate predicate = new PersonMatchesFiltersPredicate(
                 null,
-                "Interviewing");
+                "Interviewing", null);
 
         Person personInterviewing = new Person(new Name("Alice"), new Phone("12345678"),
                 new Email("alice@example.com"), new Rating("7.0"), new Status("Interviewing"),
@@ -84,7 +84,7 @@ public class PersonMatchesFiltersPredicateTest {
     public void test_matchesBoth() {
         PersonMatchesFiltersPredicate predicate = new PersonMatchesFiltersPredicate(
                 new RatingFilter(RatingFilter.Operator.LESS_THAN, 5.0),
-                "Rejected");
+                "Rejected", null);
 
         Person personRejectedPoorRating = new Person(new Name("Alice"), new Phone("12345678"),
                 new Email("alice@example.com"), new Rating("4.5"), new Status("Rejected"),
@@ -110,10 +110,10 @@ public class PersonMatchesFiltersPredicateTest {
         assertNotEquals(ratingFilter1, null);
         assertNotEquals(ratingFilter1, "string");
 
-        PersonMatchesFiltersPredicate predicate1 = new PersonMatchesFiltersPredicate(ratingFilter1, "status");
-        PersonMatchesFiltersPredicate predicate2 = new PersonMatchesFiltersPredicate(ratingFilter1, "status");
-        PersonMatchesFiltersPredicate predicate3 = new PersonMatchesFiltersPredicate(ratingFilter3, "status");
-        PersonMatchesFiltersPredicate predicate4 = new PersonMatchesFiltersPredicate(ratingFilter1, "other");
+        PersonMatchesFiltersPredicate predicate1 = new PersonMatchesFiltersPredicate(ratingFilter1, "status", null);
+        PersonMatchesFiltersPredicate predicate2 = new PersonMatchesFiltersPredicate(ratingFilter1, "status", null);
+        PersonMatchesFiltersPredicate predicate3 = new PersonMatchesFiltersPredicate(ratingFilter3, "status", null);
+        PersonMatchesFiltersPredicate predicate4 = new PersonMatchesFiltersPredicate(ratingFilter1, "other", null);
 
         // PersonMatchesFiltersPredicate equals
         assertEquals(predicate1, predicate1);
@@ -127,10 +127,10 @@ public class PersonMatchesFiltersPredicateTest {
     @Test
     public void test_toString() {
         RatingFilter ratingFilter = new RatingFilter(RatingFilter.Operator.EQUAL, 5.0);
-        PersonMatchesFiltersPredicate predicate = new PersonMatchesFiltersPredicate(ratingFilter, "status");
+        PersonMatchesFiltersPredicate predicate = new PersonMatchesFiltersPredicate(ratingFilter, "status", null);
 
         String expected = PersonMatchesFiltersPredicate.class.getCanonicalName()
-                + "{ratingFilter=" + ratingFilter + ", statusFilter=status}";
+                + "{ratingFilter=" + ratingFilter + ", statusFilter=status, dateFilter=null}";
         assertEquals(expected, predicate.toString());
     }
 }

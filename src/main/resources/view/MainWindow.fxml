@@ -41,7 +41,7 @@
         </StackPane>
 
         <StackPane fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                   minFHeight="150">
+                   minHeight="150">
           <padding>
             <Insets top="5" right="10" bottom="5" left="10" />
           </padding>

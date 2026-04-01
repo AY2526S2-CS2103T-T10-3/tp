@@ -28,37 +28,37 @@ public class FilterCommandParserTest {
         // rating only, various operators
         assertParseSuccess(parser, " " + PREFIX_RATING + ">= 7",
                 new FilterCommand(new PersonMatchesFiltersPredicate(
-                        new RatingFilter(RatingFilter.Operator.GREATER_THAN_OR_EQUAL, 7.0), null)));
+                        new RatingFilter(RatingFilter.Operator.GREATER_THAN_OR_EQUAL, 7.0), null, null)));
 
         assertParseSuccess(parser, " " + PREFIX_RATING + "> 7",
                 new FilterCommand(new PersonMatchesFiltersPredicate(
-                        new RatingFilter(RatingFilter.Operator.GREATER_THAN, 7.0), null)));
+                        new RatingFilter(RatingFilter.Operator.GREATER_THAN, 7.0), null, null)));
 
         assertParseSuccess(parser, " " + PREFIX_RATING + "< 5",
                 new FilterCommand(new PersonMatchesFiltersPredicate(
-                        new RatingFilter(RatingFilter.Operator.LESS_THAN, 5.0), null)));
+                        new RatingFilter(RatingFilter.Operator.LESS_THAN, 5.0), null, null)));
 
         assertParseSuccess(parser, " " + PREFIX_RATING + "<= 5",
                 new FilterCommand(new PersonMatchesFiltersPredicate(
-                        new RatingFilter(RatingFilter.Operator.LESS_THAN_OR_EQUAL, 5.0), null)));
+                        new RatingFilter(RatingFilter.Operator.LESS_THAN_OR_EQUAL, 5.0), null, null)));
 
         assertParseSuccess(parser, " " + PREFIX_RATING + "== 8.5",
                 new FilterCommand(new PersonMatchesFiltersPredicate(
-                        new RatingFilter(RatingFilter.Operator.EQUAL, 8.5), null)));
+                        new RatingFilter(RatingFilter.Operator.EQUAL, 8.5), null, null)));
 
         // default operator (equal)
         assertParseSuccess(parser, " " + PREFIX_RATING + " 8.5",
                 new FilterCommand(new PersonMatchesFiltersPredicate(
-                        new RatingFilter(RatingFilter.Operator.EQUAL, 8.5), null)));
+                        new RatingFilter(RatingFilter.Operator.EQUAL, 8.5), null, null)));
 
         // status only
         assertParseSuccess(parser, " " + PREFIX_STATUS + "Interviewing",
-                new FilterCommand(new PersonMatchesFiltersPredicate(null, "Interviewing")));
+                new FilterCommand(new PersonMatchesFiltersPredicate(null, "Interviewing", null)));
 
         // both rating and status
         PersonMatchesFiltersPredicate predicateBoth = new PersonMatchesFiltersPredicate(
                 new RatingFilter(RatingFilter.Operator.LESS_THAN, 5.5),
-                "Rejected");
+                "Rejected", null);
         FilterCommand expectedFilterCommandBoth = new FilterCommand(predicateBoth);
         assertParseSuccess(parser, " " + PREFIX_RATING + "< 5.5 " + PREFIX_STATUS + "Rejected",
                 expectedFilterCommandBoth);

@@ -23,20 +23,20 @@ public class SortCommandTest {
     @Test
     public void execute_sortSuccessful() {
         ModelStubAcceptingComparator modelStub = new ModelStubAcceptingComparator();
-        SortCommand sortCommand = new SortCommand(true); // ascending
+        SortCommand sortCommand = new SortCommand(true, SortCommand.SortType.RATING); // ascending
 
         CommandResult commandResult = sortCommand.execute(modelStub);
 
-        assertEquals(String.format(SortCommand.MESSAGE_SUCCESS, "ascending"),
+        assertEquals(String.format(SortCommand.MESSAGE_SUCCESS, "rating", "ascending"),
                 commandResult.getFeedbackToUser());
         requireNonNull(modelStub.comparatorUsed);
     }
 
     @Test
     public void equals() {
-        SortCommand sortCommand1 = new SortCommand(true); // ascending
-        SortCommand sortCommand2 = new SortCommand(true); // ascending
-        SortCommand sortCommand3 = new SortCommand(false); // descending
+        SortCommand sortCommand1 = new SortCommand(true, SortCommand.SortType.RATING); // ascending
+        SortCommand sortCommand2 = new SortCommand(true, SortCommand.SortType.RATING); // ascending
+        SortCommand sortCommand3 = new SortCommand(false, SortCommand.SortType.RATING); // descending
 
         // same object -> returns true
         assertEquals(sortCommand1, sortCommand1);
