@@ -29,7 +29,7 @@ public class BatchEditCommandParserTest {
     @Test
     public void parse_validArgs_returnsBatchEditCommand() {
         BatchPredicate predicate = new BatchPredicate(Optional.of(new Status("APPLIED")),
-                Optional.empty(), Optional.empty());
+                Optional.empty(), Optional.empty(), Optional.empty());
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withAddress("REJECTED").build();
 
         assertParseSuccess(parser, " s/APPLIED to s/REJECTED", new BatchEditCommand(predicate, descriptor));
