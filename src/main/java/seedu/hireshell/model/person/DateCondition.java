@@ -1,7 +1,6 @@
 package seedu.hireshell.model.person;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.hireshell.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

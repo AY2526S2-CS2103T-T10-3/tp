@@ -66,14 +66,16 @@ public class BatchPredicateTest {
     public void test_matchingDate_returnsTrue() {
         BatchPredicate predicate = new BatchPredicate(Optional.empty(), Optional.empty(),
                 Optional.empty(), Optional.of(new DateCondition("before 2026-01-01")));
-        assertTrue(predicate.test(new PersonBuilder().withCreatedAt(java.time.LocalDateTime.of(2025, 12, 31, 23, 59)).build()));
+        assertTrue(predicate.test(new PersonBuilder()
+                .withCreatedAt(java.time.LocalDateTime.of(2025, 12, 31, 23, 59)).build()));
     }
 
     @Test
     public void test_nonMatchingDate_returnsFalse() {
         BatchPredicate predicate = new BatchPredicate(Optional.empty(), Optional.empty(),
                 Optional.empty(), Optional.of(new DateCondition("before 2026-01-01")));
-        assertFalse(predicate.test(new PersonBuilder().withCreatedAt(java.time.LocalDateTime.of(2026, 1, 1, 0, 0)).build()));
+        assertFalse(predicate.test(new PersonBuilder()
+                .withCreatedAt(java.time.LocalDateTime.of(2026, 1, 1, 0, 0)).build()));
     }
 
     @Test

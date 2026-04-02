@@ -48,7 +48,8 @@ public class BatchDeleteCommandParserTest {
         BatchPredicate predicateAll = new BatchPredicate(Optional.of(new Status("APPLIED")),
                 Optional.of(List.of(new Role("Developer"))), Optional.of(new RatingCondition(">= 5.0")),
                 Optional.of(new DateCondition("before 2026-01-01")));
-        assertParseSuccess(parser, " s/APPLIED r/Developer rt/>= 5.0 dt/before 2026-01-01", new BatchDeleteCommand(predicateAll));
+        assertParseSuccess(parser, " s/APPLIED r/Developer rt/>= 5.0 dt/before 2026-01-01",
+                new BatchDeleteCommand(predicateAll));
 
         // Date only
         BatchPredicate predicateDate = new BatchPredicate(Optional.empty(), Optional.empty(),
