@@ -651,4 +651,4 @@ testers are expected to do more *exploratory* testing.
 
 
 6. **Implement tie-breakers for sorting:** The current implementation of sorting only allows users to sort by rating. However, multiple candidates can have the same rating, in which case the order of those candidates will just be by date added.
-   We plan to allow users to specify other fields, such as role or referral status. For example, `sort rt/desc rs/asc` will sort candidates by rating in descending order, and if there are ties in rating, those candidates will be sorted by referral status in ascending order (i.e. Referred candidates (Yes) will be shown before Non-Referred (No) candidates).
+   We plan to allow users to specify other fields, such as role or referral status. For example, `sort rt/desc rs/asc` will sort candidates by rating in descending order, and if there are ties in rating, those candidates will be sorted by referral status in ascending order (i.e. Referred candidates (Yes) will be shown before Non-referred (No) candidates).
