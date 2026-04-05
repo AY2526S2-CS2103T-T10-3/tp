@@ -557,15 +557,15 @@ testers are expected to do more *exploratory* testing.
 
 ### Filtering persons by date added
 
-1. Filtering persons added before or after a certain date
+1. Filtering persons added before, after, or on a certain date
 
    1. Prerequisites: Multiple persons in the list with different addition dates.
 
    1. Test case: `filter dt/before 2026-04-01`<br>
       Expected: Only persons added before April 1st, 2026 are shown. Status message indicates the number of persons listed.
 
-   1. Test case: `filter dt/between 2026-01-01`<br>
-      Expected: No filtering performed. Error message indicates invalid date filter format (must use 'before' or 'after').
+   1. Test case: `filter dt/ 2026-01-01`<br>
+      Expected: Only persons added on January 1st, 2026 are shown.
 
    1. Test case: `filter rt/>=8 dt/after 2026-01-01`<br>
       Expected: Only persons with rating >= 8.0 AND added after January 1st, 2026 are shown.
