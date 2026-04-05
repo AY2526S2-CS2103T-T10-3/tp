@@ -544,3 +544,42 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort **
+
+This project started from the base AddressBook-Level3 (AB3) codebase and evolved it into a recruiter-focused product.
+
+### Difficulty level (relative to AB3)
+
+AB3 is centered on basic contact management. HireShell is harder because we retained AB3's architectural constraints (Logic/Model/Storage/UI separation, parser-driven command flow, and test discipline) while adding domain-specific behavior for recruitment.
+The increased complexity came from introducing richer candidate semantics (status/rating/details/roles), broader command behavior (filter/sort/export/batch edit/batch delete), and more validation and parser combinations than a baseline add/edit/delete/list flow.
+
+### Main challenges faced
+
+1. Designing command syntax that remains CLI-friendly while supporting multiple optional fields and combinations.
+2. Updating UI to fit our project specifications, including updating of logic handling to ensure behavioural consistency of Ui between operations.
+3. Keeping command behavior predictable when multiple filters and batch operations are applied to filtered lists.
+4. Extending model format without breaking backward compatibility expectations and test stability.
+5. Preserving AB3 code quality standards (layer boundaries, clear error messages, and comprehensive tests) while shipping feature growth.
+
+### Reuse from AB3 and impact on effort
+
+A significant portion of effort was saved through reuse.
+
+Key reused/adapted components include:
+
+1. Command execution pipeline and parser architecture in classes such as `AddressBookParser` and `LogicManager`.
+2. Model-management patterns in `ModelManager` and list/filter update flows.
+3. JSON persistence foundations in `JsonAddressBookStorage`, `JsonUserPrefsStorage`, and `JsonAdaptedPerson`.
+
+Our effort was concentrated on adapting and extending these components for recruitment use cases, not on rebuilding the application framework itself.
+
+### Achievements for the effort spent
+
+1. Included new fields appropriate to the project's goal.
+2. Added higher-value commands beyond baseline AB3 interactions (e.g., batch operations, filter/sort/export flows).
+3. Reworked the Ui to better fit the project's goal, including updating of logic handling to ensure consistency in UI updates
+4. Added command history to provide command navigation 
+5. Produced documentation that supports both user onboarding and evaluator traceability.
