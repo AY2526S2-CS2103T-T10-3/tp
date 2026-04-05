@@ -279,14 +279,14 @@ _{Explain here how the data archiving feature will be implemented}_
 * Enjoys using keyboard shortcuts
 * Needs to categorise their contacts
 * Works in an office, uses a desktop
-* Values efficiency and speed over user interface 
+* Values efficiency and speed over user interface
 * Frequently performs batch operations (e.g. deleting a whole group)
 
-**Value proposition**: 
+**Value proposition**:
 
-Our application provides a comprehensive list of potential job candidates. 
-It allows recruiters to quickly change details (e.g. add, delete) of candidate contacts, including streamlined batch operations. 
-It also categorizes contacts and provides functionality for efficient searching, sorting, and filtering. 
+Our application provides a comprehensive list of potential job candidates.
+It allows recruiters to quickly change details (e.g. add, delete) of candidate contacts, including streamlined batch operations.
+It also categorizes contacts and provides functionality for efficient searching, sorting, and filtering.
 It is optimized for fast keyboard navigation.
 
 
@@ -354,7 +354,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `HireShell` and the **Actor** is the `Recruiter`, 
+(For all use cases below, the **System** is the `HireShell` and the **Actor** is the `Recruiter`,
 unless specified otherwise)
 
 **Use Case: UC01- Add a candidate**
@@ -363,7 +363,7 @@ unless specified otherwise)
 1.	Recruiter selects the option to add a candidate
 2.	HireShell asks for candidate contacts with key fields
 3.	Recruiter enters candidate information
-4.  HireShell shows that the candidate has been successfully added 
+4.  HireShell shows that the candidate has been successfully added
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use case ends.
 
@@ -371,7 +371,7 @@ unless specified otherwise)
 **Extensions:**
 
 * 3a. HireShell detects missing/invalid information in a key field
-      
+
     * 3a1. HireShell requests for missing/invalid information
     * 3a2. Recruiter re-enters missing/invalid information
 
@@ -382,7 +382,7 @@ Steps 3a1-3a2 are repeated until there is no missing/invalid information in key 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 Use case resumes from step 4.
 
-    
+
 **Use Case: UC02- Add a candidate using CLI**
 
 **MSS:**
@@ -404,7 +404,7 @@ Use case resumes from step 4.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use case resumes from step 4.
 
-      
+
 **Use Case: UC03- Delete a candidate using CLI**
 
 **MSS:**
@@ -420,7 +420,7 @@ Use case resumes from step 4.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use case ends.
 
-      
+
 **Use Case: UC04- Edit a candidate using CLI**
 
 **MSS:**
@@ -436,7 +436,7 @@ Use case resumes from step 4.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use case ends.
 
-      
+
 **Use Case: UC05- Navigate the list of candidates using CLI**
 
 **MSS:**
@@ -445,7 +445,7 @@ Use case resumes from step 4.
 3.	HireShell shows a list of candidates
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use Case ends.
-      
+
 **Extensions:**
 * 2a. HireShell detects that there are no candidates
     * 2a1. HireShell shows that there are no candidates
@@ -660,5 +660,5 @@ Our effort was concentrated on adapting and extending these components for recru
 1. Included new fields appropriate to the project's goal.
 2. Added higher-value commands beyond baseline AB3 interactions (e.g., batch operations, filter/sort/export flows).
 3. Reworked the Ui to better fit the project's goal, including updating of logic handling to ensure consistency in UI updates
-4. Added command history to provide command navigation 
+4. Added command history to provide command navigation
 5. Produced documentation that supports both user onboarding and evaluator traceability.
