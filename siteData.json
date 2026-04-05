@@ -63,6 +63,11 @@
         "appendix-instructions-for-manual-testing": "Appendix: Instructions for manual testing",
         "launch-and-shutdown": "Launch and shutdown",
         "deleting-a-person": "Deleting a person",
+        "sorting-persons-by-date-added": "Sorting persons by date added",
+        "filtering-persons-by-date-added": "Filtering persons by date added",
+        "batch-deleting-persons": "Batch deleting persons",
+        "batch-editing-persons": "Batch editing persons",
+        "exporting-data": "Exporting data",
         "saving-data": "Saving data"
       },
       "headingKeywords": {}
