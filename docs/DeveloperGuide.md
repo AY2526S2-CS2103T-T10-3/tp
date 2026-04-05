@@ -630,11 +630,11 @@ testers are expected to do more *exploratory* testing.
 
 **Team Size: 5**
 
-1. **Make command history persist:** The current implementation of the command history does display the command history for the previous session (i.e. not persistent through app restarts). 
-     We plan to make the command history persistent across sessions, such that users can still see the command history from their previous session when they restart the app.
+1. **Make command history persist:** The current implementation of the command history does display the command history for the previous session (i.e. not persistent through app restarts).
+   We plan to make the command history persistent across sessions, such that users can still see the command history from their previous session when they restart the app.
 
 
-2. **Allow for custom exported file names:** The current implementation of the export function does not allow users to specify the name of the exported file, and defaults to `hireshell_export.csv`. 
+2. **Allow for custom exported file names:** The current implementation of the export function does not allow users to specify the name of the exported file, and defaults to `hireshell_export.csv`.
    We plan to allow users to specify the name of the exported file, such that they can choose a more descriptive name for their exported file (e.g. `candidates-april-2026.csv`).
 
 
@@ -646,9 +646,9 @@ testers are expected to do more *exploratory* testing.
    We plan to implement range filtering, such that users can filter candidates with rating between 7.0 and 9.0 using `filter rt/>=7.0 rt/<=9.0`.
 
 
-5. **Allow alphabetical sorting for name:** The current implementation of the sort function only supports sorting by rating. 
+5. **Allow alphabetical sorting for name:** The current implementation of the sort function only supports sorting by rating.
    We plan to allow users to sort candidates alphabetically by name using `sort n/asc` or `sort n/desc`.
 
 
 6. **Implement tie-breakers for sorting:** The current implementation of sorting only allows users to sort by rating. However, multiple candidates can have the same rating, in which case the order of those candidates will just be by date added.
-    We plan to allow users to specify other fields, such as role or referral status. For example, `sort rt/desc rs/asc` will sort candidates by rating in descending order, and if there are ties in rating, those candidates will be sorted by referral status in ascending order (i.e. Referred candidates (Yes) will be shown before Non-Referred (No) candidates).
+   We plan to allow users to specify other fields, such as role or referral status. For example, `sort rt/desc rs/asc` will sort candidates by rating in descending order, and if there are ties in rating, those candidates will be sorted by referral status in ascending order (i.e. Referred candidates (Yes) will be shown before Non-Referred (No) candidates).
