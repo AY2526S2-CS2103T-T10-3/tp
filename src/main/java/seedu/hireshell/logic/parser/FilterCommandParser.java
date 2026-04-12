@@ -24,7 +24,9 @@ import seedu.hireshell.model.person.Rating;
  */
 public class FilterCommandParser implements Parser<FilterCommand> {
 
-    private static final Pattern RATING_FILTER_PATTERN = Pattern.compile("(?<operator>[><]=?|==)?\\s*(?<value>.*)");
+    public static final String MESSAGE_RATING_FILTER_FORMAT = "Rating filter format is: [operator] RATING (0-10). "
+            + "Supported operators: >, >=, <, <=, ==.";
+    private static final Pattern RATING_FILTER_PATTERN = Pattern.compile("(?<operator>[><]=?|==)?\\s*(?<value>.+)");
     private static final Pattern DATE_FILTER_PATTERN = Pattern.compile("(?<operator>before|after|on)\\s+(?<value>.*)");
 
     /**
@@ -69,13 +71,18 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     private RatingFilter parseRatingFilter(String ratingArg) throws ParseException {
         Matcher matcher = RATING_FILTER_PATTERN.matcher(ratingArg.trim());
         if (!matcher.matches()) {
-            throw new ParseException(Rating.MESSAGE_CONSTRAINTS);
+            throw new ParseException(MESSAGE_RATING_FILTER_FORMAT);
         }
 
         String operatorStr = matcher.group("operator");
-        String valueStr = matcher.group("value");
+        String valueStr = matcher.group("value").trim();
 
         if (!Rating.isValidRating(valueStr)) {
+            // Check if valueStr itself contains what looks like an operator,
+            // which would mean the overall format is wrong (like '>> 5')
+            if (valueStr.matches(".*[><=].*")) {
+                throw new ParseException(MESSAGE_RATING_FILTER_FORMAT);
+            }
             throw new ParseException(Rating.MESSAGE_CONSTRAINTS);
         }
 

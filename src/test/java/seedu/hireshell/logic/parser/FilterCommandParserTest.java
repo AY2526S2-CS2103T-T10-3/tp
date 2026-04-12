@@ -17,6 +17,7 @@ import seedu.hireshell.logic.commands.FilterCommand;
 import seedu.hireshell.model.person.PersonMatchesFiltersPredicate;
 import seedu.hireshell.model.person.PersonMatchesFiltersPredicate.DateFilter;
 import seedu.hireshell.model.person.PersonMatchesFiltersPredicate.RatingFilter;
+import seedu.hireshell.model.person.Rating;
 
 public class FilterCommandParserTest {
 
@@ -104,11 +105,19 @@ public class FilterCommandParserTest {
     public void parse_invalidRating_throwsParseException() {
         // invalid rating value
         assertParseFailure(parser, " " + PREFIX_RATING + ">= abc",
-                "Ratings should be a number between 0 and 10 (decimals allowed).");
+                Rating.MESSAGE_CONSTRAINTS);
 
         // rating value out of range
         assertParseFailure(parser, " " + PREFIX_RATING + " 11",
-                "Ratings should be a number between 0 and 10 (decimals allowed).");
+                Rating.MESSAGE_CONSTRAINTS);
+
+        // invalid operator
+        assertParseFailure(parser, " " + PREFIX_RATING + ">> 5",
+                FilterCommandParser.MESSAGE_RATING_FILTER_FORMAT);
+
+        // space between operator and equals
+        assertParseFailure(parser, " " + PREFIX_RATING + "> = 5",
+                FilterCommandParser.MESSAGE_RATING_FILTER_FORMAT);
     }
 
     @Test
