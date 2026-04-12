@@ -31,7 +31,7 @@ public class AddCommand extends Command {
             + "[" + PREFIX_RATING + "RATING] "
             + PREFIX_STATUS + "STATUS "
             + PREFIX_REFERRAL_STATUS + "REFERRAL_STATUS "
-            + "[" + PREFIX_ROLE + "ROLE]"
+            + "[" + PREFIX_ROLE + "ROLE] "
             + "[" + PREFIX_DETAILS + "DETAILS]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
