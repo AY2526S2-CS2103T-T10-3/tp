@@ -29,6 +29,12 @@ public class FilterCommandParserTest {
     }
 
     @Test
+    public void parse_invalidPreamble_throwsParseException() {
+        assertParseFailure(parser, " abc " + PREFIX_STATUS + "Accepted",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+    }
+
+    @Test
     public void parse_validArgs_returnsFilterCommand() {
         // rating only, various operators
         assertParseSuccess(parser, " " + PREFIX_RATING + ">= 7",
@@ -118,6 +124,20 @@ public class FilterCommandParserTest {
         // space between operator and equals
         assertParseFailure(parser, " " + PREFIX_RATING + "> = 5",
                 FilterCommandParser.MESSAGE_RATING_FILTER_FORMAT);
+    }
+
+    @Test
+    public void parse_invalidStatus_throwsParseException() {
+        // empty status
+        assertParseFailure(parser, " " + PREFIX_STATUS + " ",
+                "Status filter value cannot be empty.");
+    }
+
+    @Test
+    public void parse_invalidRole_throwsParseException() {
+        // empty role
+        assertParseFailure(parser, " " + PREFIX_ROLE + " ",
+                "Role filter value cannot be empty.");
     }
 
     @Test

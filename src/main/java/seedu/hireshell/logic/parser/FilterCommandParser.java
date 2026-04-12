@@ -41,6 +41,10 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_RATING, PREFIX_STATUS, PREFIX_DATE,
                 PREFIX_ROLE);
 
+        if (!argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        }
+
         if (!argMultimap.getValue(PREFIX_RATING).isPresent() && !argMultimap.getValue(PREFIX_STATUS).isPresent()
                 && !argMultimap.getValue(PREFIX_DATE).isPresent() && !argMultimap.getValue(PREFIX_ROLE).isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
@@ -53,14 +57,26 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             ratingFilter = parseRatingFilter(argMultimap.getValue(PREFIX_RATING).get());
         }
 
-        String statusFilter = argMultimap.getValue(PREFIX_STATUS).orElse(null);
+        String statusFilter = null;
+        if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
+            statusFilter = argMultimap.getValue(PREFIX_STATUS).get().trim();
+            if (statusFilter.isEmpty()) {
+                throw new ParseException("Status filter value cannot be empty.");
+            }
+        }
 
         DateFilter dateFilter = null;
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
             dateFilter = parseDateFilter(argMultimap.getValue(PREFIX_DATE).get());
         }
 
-        String roleFilter = argMultimap.getValue(PREFIX_ROLE).orElse(null);
+        String roleFilter = null;
+        if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
+            roleFilter = argMultimap.getValue(PREFIX_ROLE).get().trim();
+            if (roleFilter.isEmpty()) {
+                throw new ParseException("Role filter value cannot be empty.");
+            }
+        }
 
         return new FilterCommand(new PersonMatchesFiltersPredicate(ratingFilter, statusFilter, dateFilter, roleFilter));
     }
