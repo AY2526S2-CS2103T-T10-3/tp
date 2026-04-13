@@ -331,7 +331,8 @@ HireShell data are saved automatically as a JSON file `[JAR file location]/data/
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, HireShell will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+If your changes to the data file makes its format invalid, HireShell starts with an empty in-memory address book on the next run. The corrupted file remains as-is until you run a command; after that, HireShell rewrites your data file with the current app data. Hence, it is recommended to take a backup of the file before editing it.<br>
+<br>
 Furthermore, certain edits can cause the HireShell to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
@@ -366,8 +367,10 @@ _Details coming soon ..._
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
+3. **When using “/” in field values**, the application may misinterpret the input as additional parameters instead of part of the intended value. This is because “/” is reserved as a parameter prefix (e.g., n/, p/, rs/, rt/). The remedy is to avoid using “/” in field values (e.g., use UIUX designer instead of UI/UX designer).
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
