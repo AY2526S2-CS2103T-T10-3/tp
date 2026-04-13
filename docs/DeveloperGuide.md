@@ -21,15 +21,19 @@ Unit Testing is done using [JUnit5](https://junit.org/junit5/).
 
 **AI Declaration**
 
-* Nivanth - I used Gemini CLI and ChatGPT for generating test cases for sorting and filtering functions, as well as debugging errors. Additionally, I used it for ideas when thinking about the implementation of filtering. Before using the code I did verify that it is correct and efficient. All AI generated content was reviewed for correctness and checked against project requirements.
+* Nivanth - Gemini CLI and ChatGPT were used for generating test cases for sorting and filtering functions, as well as debugging errors. Additionally, I used it for ideas when thinking about the implementation of filtering. Before using the code I did verify that it is correct and efficient. All AI generated content was reviewed for correctness and checked against project requirements.
 
-* Suhan - I used Gemini to get the implementation plan for Batch Edit and Batch Delete command and generate the test cases for those commands. I also used it for solving debugging errors. All AI generated content was reviewed for correctness and checked against project requirements.
+
+* Suhan - Gemini was used to get the implementation plan for Batch Edit and Batch Delete command and generate the test cases for those commands. I also used it for solving debugging errors. All AI generated content was reviewed for correctness and checked against project requirements.
+
 
 * Keison - CoPilot's codex was used to help with implementing the export command, and for some generation and editing of test cases. It was also used to aid in understanding and fixing bugs. All AI generated content was reviewed for correctness and checked against project requirements.
 
-* Jan Hoe- I used GitHub Copilot and Gemini Code Assist to transform the list of contacts into a table. I also used it for the draggable detailed view section, and debugging whatever errors that appeared on the way. All AI generated content was reviewed for correctness and checked against project requirements.
 
-* Keith - I used GitHub Copilot to auto-complete some parts of the implementation of the command history navigation function. ChatGPT was used to generate JavaDocs. All AI generated content was reviewed for correctness and checked against project requirements.
+* Jan Hoe - GitHub Copilot and Gemini Code Assist were used to transform the list of contacts into a table. I also used it for the draggable detailed view section, and debugging whatever errors that appeared on the way. All AI generated content was reviewed for correctness and checked against project requirements.
+
+
+* Keith - GitHub Copilot was used to auto-complete some parts of the implementation of the command history navigation function. ChatGPT was used to generate JavaDocs. All AI generated content was reviewed for correctness and checked against project requirements.
 
 --------------------------------------------------------------------------------------------------------------------
 
