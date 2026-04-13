@@ -201,6 +201,7 @@ Format: `filter [rt/RATING_FILTER] [s/STATUS] [dt/DATE_FILTER] [r/ROLE]`
 * `STATUS` matches the status field of the person (case-insensitive, partial matches allowed).
 * `DATE_FILTER` can include an operator (`before`, `after`, `on`) followed by a date in `YYYY-MM-DD` format. If no operator is provided, `on` is assumed.
 * `ROLE` matches one of the roles of the person (case-insensitive, partial matches allowed).
+* Persons with no `ROLE` cannot be filtered (i.e. cannot do filter r/) 
 * If multiple criteria are provided, only persons matching **all** of them will be shown.
 
 Examples:
@@ -221,6 +222,7 @@ Format: `sort rt/ORDER` or `sort dt/ORDER`
 * `rt/ORDER` sorts persons by their rating.
 * `dt/ORDER` sorts persons by the date they were added.
 * You can only sort by one field at a time.
+* Sorting by rating and editing a persons' rating after will preserve the order in the list, moving the person.
 
 Examples:
 * `sort rt/desc` sorts persons from the highest rating to the lowest.
